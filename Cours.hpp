@@ -12,6 +12,7 @@
 
 class Cours {
 
+private:
 	std::string titre;
 
 public:
@@ -19,8 +20,6 @@ public:
 	Cours(std::string t) : titre(t) {}
 
 	std::string getTitre() { return titre; }
-
-
 };
 
 #endif /* COURS_HPP_ */
