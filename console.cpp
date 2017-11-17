@@ -25,7 +25,5 @@ int main(int argc, char **argv) {
 	std::cout << en1.getLogin() << std::endl;
 	std::cout << en1.verifMDP("pass") << std::endl;
 	std::cout << en1.verifMDP("fake") << std::endl;
-	for(std::list<Cours>::iterator it = en1.getPremierCours(); it != en1.getDernierCours(); it ++) {
-		std::cout << "Nom : " << it->getNom() << " enseignant : " << it->getEnseignant()->getLogin() << std::endl;
-	}
+	std::cout << en1.afficherCours() << std::endl;
 }

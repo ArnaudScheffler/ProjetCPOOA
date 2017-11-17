@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include <list>
+#include <sstream>
+#include <string>
 
 #include "Cours.hpp"
 
@@ -26,6 +28,13 @@ public:
 	bool verifMDP(const std::string mdp) { return mdp.compare(motDePasse) == 0 ? true : false; }
 	std::list<Cours>::iterator getPremierCours() { return listeCours.begin(); };
 	std::list<Cours>::iterator getDernierCours() { return listeCours.end(); };
+	std::string afficherCours(){
+		std::stringstream stringstream;
+		for(std::list<Cours>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
+			stringstream << "Nom : " << it->getNom() << " Enseignant auteur : " << it->getLoginEnseignant() << std::endl;
+		}
+		return stringstream.str();
+	}
 
 };
 
