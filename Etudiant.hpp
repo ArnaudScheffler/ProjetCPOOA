@@ -35,6 +35,8 @@ public:
 		}
 		return stringstream.str();
 	}
+	void inscrire(Cours& c) {listeCours.push_back(c); };
+	void desinscrire(Cours& c) {listeCours.remove(c); };
 
 };
 
