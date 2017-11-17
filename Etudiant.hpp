@@ -26,7 +26,7 @@ public:
 	bool verifMDP(const std::string mdp) { return mdp.compare(motDePasse) == 0 ? true : false; }
 	std::list<Cours>::iterator getPremierCours() { return listeCours.begin(); };
 	std::list<Cours>::iterator getDernierCours() { return listeCours.end(); };
-
+  void inscrire(Cours &cours){ cours.addEtudiantP(this); }
 };
 
 

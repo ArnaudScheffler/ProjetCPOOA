@@ -1,6 +1,6 @@
 #Les configurations du compilateur
 C = g++
-CFLAGS = -Wall
+CFLAGS = -Wall -std=c++11
 
 FILE = Cours.o
 
