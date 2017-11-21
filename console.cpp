@@ -18,32 +18,28 @@ int main(int argc, char **argv) {
 	Cours c1 = Cours("CPOOA", "10/10/10", "10/10/10", "10/10/10", 20);
 	Cours c2 = Cours("Anglais", "10/10/10", "10/10/10", "10/10/10", 20);
 	Cours c3 = Cours("Toucan", "10/10/10", "10/10/10", "10/10/10", 20);
-	
-	Etudiant etu1 = Etudiant("log","pass");
-
 
 	//On construit notre enseignant
 	en1.proposerUnCours(c1);
 	en1.proposerUnCours(c2);
 	en1.proposerUnCours(c3);
 
-	
-	etu1.inscrire(c1);
-	etu1.inscrire(c2);
+	//On construit notre etudiant
+	et1.inscrire(c1);
+	et1.inscrire(c2);
 
 	
-	std::cout << en1.getLogin() << std::endl;
+	std::cout << "Affichages pour l'enseignant : " <<en1.getLogin() << std::endl;
 	std::cout << en1.verifMDP("pass") << std::endl;
 	std::cout << en1.verifMDP("fake") << std::endl;
+	std::cout << "Cours de l'enseignant :\n"<< en1.afficherCoursPropose() << std::endl;
 	/*
 	for(auto c : c1.getPremierEtudiant()){
 	  std::cout << c << std::endl;
 	  }*/
         
-	//On construit notre etudiant
-
-	std::cout << "Etudiant :" << et1.getLogin() << std::endl;
-	std::cout << et1.afficherCours() << std::endl;
+	std::cout << "Affichages pour l'etudiant : " << et1.getLogin() << std::endl;
+	std::cout << "Cours de l'etudiant :\n" << et1.afficherCours() << std::endl;
 
 }
 

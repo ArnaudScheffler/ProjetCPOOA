@@ -20,25 +20,32 @@ class Etudiant {
 protected:
 	std::string login;
 	std::string motDePasse;
-	std::list<Cours> listeCours;
+	std::list<Cours*> listeCours;
 
 public:
 	Etudiant(std::string login, std::string motDePasse) : login(login), motDePasse(motDePasse) {};
+
 	const std::string getLogin() { return login; }
 	bool verifMDP(const std::string mdp) { return mdp.compare(motDePasse) == 0 ? true : false; }
-	std::list<Cours>::iterator getPremierCours() { return listeCours.begin(); };
-	std::list<Cours>::iterator getDernierCours() { return listeCours.end(); };
-
-
+	std::list<Cours*>::iterator getPremierCours() { return listeCours.begin(); };
+	std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); };
+	void inscrire(Cours& c) { c.addEtudiantP(*this); listeCours.push_back(&c); };
+	void desinscrire(Cours& c) { listeCours.remove(&c); };
 	std::string afficherCours(){
 		std::stringstream stringstream;
-		for(std::list<Cours>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
-			stringstream << "Nom : " << it->getNom() << " Enseignant auteur : " << it->getLoginEnseignant() << std::endl;
+		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
+			stringstream << "Nom : " << (*it)->getNom() <<" Auteur : " << (*it)->getLoginEnseignant() << std::endl;
 		}
 		return stringstream.str();
 	}
-	void inscrire(Cours& c) {listeCours.push_back(c);cours.addEtudiantP(this); };
-	void desinscrire(Cours& c) {listeCours.remove(c); };
+	//Pour utiliser liste.remove on doit définir un opérateur d'égalitée pour nos classes
+	bool operator==( const Etudiant& test ) const  {
+		bool res = false;
+		if(this->login == test.login){
+			res = true;
+		}
+		return res;
+	}
 };
 
 

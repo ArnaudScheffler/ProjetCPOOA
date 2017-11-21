@@ -23,22 +23,29 @@ private:
 	std::string dateFin;
 	std::string dateFinInscription;
 	int nbPlace;
-        Enseignant* enseignant;
-  std::list<Etudiant*> listeEtudiant;
+	Enseignant* enseignant;
+	std::list<Etudiant*> listeEtudiant;
 
 public:
 	// V√©rifier la passage par r√©f√©rence
 	Cours(std::string nom, std::string dateDebut, std::string dateFin, std::string dateFinInscription, int nbPlace)
-	: nom(nom), dateDebut(dateDebut), dateFin(dateFin), dateFinInscription(dateFinInscription), nbPlace(nbPlace), enseignant(NULL) {}
+: nom(nom), dateDebut(dateDebut), dateFin(dateFin), dateFinInscription(dateFinInscription), nbPlace(nbPlace), enseignant(NULL) {}
 
 
 	std::string getNom() { return nom; }
-	void setEnseignant(Enseignant* e) { enseignant = e; }
-	Enseignant* getEnseignant() { return enseignant; }
+	void setEnseignant(Enseignant& e) { enseignant = &e; }
+	Enseignant& getEnseignant() { return *enseignant ;}
 	const std::string getLoginEnseignant();
-  void addEtudiantP(Etudiant* etu){listeEtudiant.push_back(etu);}
-  
-    std::list<Etudiant*> getPremierEtudiant() { return listeEtudiant;}
+	std::list<Etudiant*> getListeEtudiantP() { return listeEtudiant;}
+	void addEtudiantP(Etudiant& etu){listeEtudiant.push_back(&etu);}
+	//Pour utiliser liste.remove on doit dÈfinir un opÈrateur d'ÈgalitÈe pour nos classes
+	bool operator==( const Cours& test ) const  {
+		bool res = false;
+		if(this->nom == test.nom){
+			res = true;
+		}
+		return res;
+	}
 };
 
 #endif /* COURS_HPP_ */

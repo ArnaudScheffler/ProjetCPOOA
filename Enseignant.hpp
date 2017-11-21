@@ -15,14 +15,21 @@
 class Enseignant : public Etudiant {
 
 private:
-	std::list<Cours> listeCoursPropose;
+	std::list<Cours*> listeCoursPropose;
 
 public:
 
 	Enseignant(std::string login, std::string motDePasse) : Etudiant(login, motDePasse) {};
-	void proposerUnCours(Cours& c) { c.setEnseignant(this); listeCoursPropose.push_back(c); };
-	std::list<Cours>::iterator getPremierCours() { return listeCoursPropose.begin(); };
-	std::list<Cours>::iterator getDernierCours() { return listeCoursPropose.end(); };
+	void proposerUnCours(Cours& c) { c.setEnseignant(*this); listeCoursPropose.push_back(&c); };
+	std::list<Cours*>::iterator getPremierCoursPropose() { return listeCoursPropose.begin(); };
+	std::list<Cours*>::iterator getDernierCoursPropose() { return listeCoursPropose.end(); };
+	std::string afficherCoursPropose(){
+		std::stringstream stringstream;
+		for(std::list<Cours*>::iterator it = getPremierCoursPropose(); it != getDernierCoursPropose(); it++) {
+			stringstream << "Nom : " << (*it)->getNom() << std::endl;
+		}
+		return stringstream.str();
+	}
 
 };
 
