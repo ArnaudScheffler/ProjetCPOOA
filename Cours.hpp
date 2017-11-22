@@ -31,14 +31,14 @@ public:
 	Cours(std::string nom, std::string dateDebut, std::string dateFin, std::string dateFinInscription, int nbPlace)
 : nom(nom), dateDebut(dateDebut), dateFin(dateFin), dateFinInscription(dateFinInscription), nbPlace(nbPlace), enseignant(NULL) {}
 
-
 	std::string getNom() { return nom; }
 	void setEnseignant(Enseignant& e) { enseignant = &e; }
 	Enseignant& getEnseignant() { return *enseignant ;}
+
 	const std::string getLoginEnseignant();
 	std::list<Etudiant*> getListeEtudiantP() { return listeEtudiant;}
 	void addEtudiantP(Etudiant& etu){listeEtudiant.push_back(&etu);}
-	//Pour utiliser liste.remove on doit définir un opérateur d'égalitée pour nos classes
+	//Pour utiliser liste.remove on doit dï¿½finir un opï¿½rateur d'ï¿½galitï¿½e pour nos classes
 	bool operator==( const Cours& test ) const  {
 		bool res = false;
 		if(this->nom == test.nom){
