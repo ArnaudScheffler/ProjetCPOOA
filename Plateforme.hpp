@@ -29,12 +29,12 @@ public:
 
 	void addCours(Cours& c) { mapCours.insert(std::make_pair(c.getNom(), &c)); }
 	Cours& getCoursParNom(const std::string nom) { return *mapCours[nom]; }
-	std::map<std::string, Cours*>::iterator getPremierCours() { return mapCours.begin(); };
-	std::map<std::string, Cours*>::iterator getDernierCours() { return mapCours.end(); };
+    std::map<std::string, Cours*>::iterator getPremierCours() { return mapCours.begin(); }
+    std::map<std::string, Cours*>::iterator getDernierCours() { return mapCours.end(); }
 	std::string afficherCours() {
 		std::stringstream stringstream;
 		for(std::map<std::string, Cours*>::iterator it = mapCours.begin(); it != mapCours.end(); it++) {
-			stringstream << "Nom : " << (*it).second->getNom() <<" Auteur : " << (*it).second->getLoginEnseignant() << std::endl;
+            stringstream << (*it).second->getNom() <<" Auteur : " << (*it).second->getLoginEnseignant() << std::endl;
 		}
 		return stringstream.str();
 	}
@@ -44,7 +44,7 @@ public:
 	std::string afficherEtudiant() {
 		std::stringstream stringstream;
 		for(std::map<std::string, Etudiant*>::iterator it = mapEtudiant.begin(); it != mapEtudiant.end(); it++) {
-			stringstream << "Login : " << (*it).second->getLogin() << std::endl;
+            stringstream << (*it).second->getLogin() << std::endl;
 		}
 		return stringstream.str();
 	}
@@ -54,7 +54,7 @@ public:
 	std::string afficherEnseignant() {
 		std::stringstream stringstream;
 		for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
-			stringstream << "Login : " << (*it).second->getLogin() << std::endl;
+            stringstream << (*it).second->getLogin() << std::endl;
 		}
 		return stringstream.str();
 	}

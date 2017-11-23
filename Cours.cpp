@@ -10,4 +10,4 @@
 
 const std::string Cours::getLoginEnseignant() {
 	return enseignant->getLogin();
-};
+}

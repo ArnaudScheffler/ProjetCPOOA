@@ -19,10 +19,10 @@ private:
 
 public:
 
-	Enseignant(std::string login, std::string motDePasse) : Etudiant(login, motDePasse) {};
-	void proposerUnCours(Cours& c) { c.setEnseignant(*this); listeCoursPropose.push_back(&c); };
-	std::list<Cours*>::iterator getPremierCoursPropose() { return listeCoursPropose.begin(); };
-	std::list<Cours*>::iterator getDernierCoursPropose() { return listeCoursPropose.end(); };
+    Enseignant(std::string login, std::string motDePasse) : Etudiant(login, motDePasse) {}
+    void proposerUnCours(Cours& c) { c.setEnseignant(*this); listeCoursPropose.push_back(&c); }
+    std::list<Cours*>::iterator getPremierCoursPropose() { return listeCoursPropose.begin(); }
+    std::list<Cours*>::iterator getDernierCoursPropose() { return listeCoursPropose.end(); }
 	std::string afficherCoursPropose(){
 		std::stringstream stringstream;
 		for(std::list<Cours*>::iterator it = getPremierCoursPropose(); it != getDernierCoursPropose(); it++) {
