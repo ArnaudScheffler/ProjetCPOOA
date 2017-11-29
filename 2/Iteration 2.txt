@@ -1,0 +1,1 @@
+Par rapport a l'iteration 1, On a ajouté un menu dans la console pour pouvoir faire des tests sur les methodes sans les appeller les unes après les autres. Le diagramme de classe ne change pas.
