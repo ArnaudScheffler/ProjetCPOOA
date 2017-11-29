@@ -22,7 +22,6 @@ void pause(){
 int main(int argc, char **argv) {
 	bool quit = false;
 	int choice = 0;
-	Plateforme p = Plateforme();
 	Enseignant endef = Enseignant("Gautier", "pass");
 	Etudiant etudef = Etudiant("this4u","labddcdur");
 	Cours coudef = Cours("CPOOA", "10/10/10", "10/10/10", "10/10/10", 20);
