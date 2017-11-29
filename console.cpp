@@ -15,7 +15,7 @@
 
 void pause(){
 	std::cout << "Appuyez sur une touche pour continuer..." << std::endl;
-	std::cin.ignore();
+    std::cin.clear();
 	std::cin.get();
 }
 
@@ -29,10 +29,10 @@ int main(int argc, char **argv) {
 	while (!quit){
 		std::cout << "\nBienvenue dans notre menu ! Choisissez votre action :"
 				<< "\n\t [1] - Quitter"
-				<< "\n\t [2] - Creer un Enseignant"
-				<< "\n\t [3] - Creer un Etudiant"
-				<< "\n\t [4] - Creer un Cours"
-				<< "\n\t [5] - Faire proposer le Cours par defaut l'enseignant par defaut"
+                << "\n\t [2] - Créer un Enseignant"
+                << "\n\t [3] - Créer un Etudiant"
+                << "\n\t [4] - Créer un Cours"
+                << "\n\t [5] - Faire proposer le Cours par défaut l'enseignant par défaut"
 				<< "\n\t [6] - Faire s'inscrire a un Cours l'etudiant par defaut"
 				<< "\n\t [7] - Faire se desinscrire a un Cours l'etudiant par defaut"
 				<< "\n\t [8] - Afficher les cours propose par l'enseignant par defaut"
@@ -50,9 +50,9 @@ int main(int argc, char **argv) {
 				Enseignant *entest;
 				std::string login = "";
 				std::string mdp = "";
-				std::cout << "Compris !\nEntrez le login de l'Enseignant." << std::endl;
+                std::cout << "Compris !\nEntrez le login de l'Enseignant : ";
 				std::cin >> login;
-				std::cout << "Entrez le mot de passe de l'Enseignant." << std::endl;
+                std::cout << "Entrez le mot de passe de l'Enseignant : ";
 				std::cin >> mdp;
 				entest = new Enseignant(login, mdp);
 				std::cout << "Votre enseignant : \nLogin : " << entest->getLogin() <<"\nMDP : " << entest->getMDP() << std::endl;
@@ -64,9 +64,9 @@ int main(int argc, char **argv) {
 				Etudiant *etutest;
 				std::string login = "";
 				std::string mdp = "";
-				std::cout << "Compris !\nEntrez le login de l'Etudiant." << std::endl;
+                std::cout << "Compris !\nEntrez le login de l'Etudiant : ";
 				std::cin >> login;
-				std::cout << "Entrez le mot de passe de l'Etudiant." << std::endl;
+                std::cout << "Entrez le mot de passe de l'Etudiant : ";
 				std::cin >> mdp;
 				etutest = new Etudiant(login, mdp);
 				std::cout << "Votre etudiant : \nLogin : " << etutest->getLogin() <<"\nMDP : " << etutest->getMDP() << std::endl;
@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
 				break;
 			}
 			default:{
-				std::cout << "Entree non reconnue, veuillez reessayer." << std::endl;
+                std::cout << "Entrée non reconnue, veuillez réessayer." << std::endl;
 				pause();
 			}
 		}
