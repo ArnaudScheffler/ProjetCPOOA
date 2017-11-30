@@ -11,10 +11,7 @@ console: Cours.o console.cpp
 	$(C) $(CFLAGS) -c $<
 
 clean:
-	rm -f $(FILE)
-
-mrproper: clean
-	rm -f console
+	rm -f $(FILE) console
 
 #Affichage des varriables
 print-%  : ; @echo $* = $($*)

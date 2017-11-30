@@ -27,7 +27,7 @@ private:
 	std::map<std::string, Cours*> mapCours;
 	std::map<std::string, Etudiant*> mapEtudiant;
 	std::map<std::string, Enseignant*> mapEnseignant;
-  std::map<std::string, Admin*> mapAdmin;
+    std::map<std::string, Admin*> mapAdmin;
 
 public:
 
@@ -157,13 +157,13 @@ public:
 
     void vider(){
         for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
-            delete &it;
+            delete it->second;
         }
         for(std::map<std::string, Cours*>::iterator it = mapCours.begin(); it != mapCours.end(); it++) {
-            delete &it;
+            delete it->second;
         }
         for(std::map<std::string, Etudiant*>::iterator it = mapEtudiant.begin(); it != mapEtudiant.end(); it++) {
-            delete (*it).second;
+            delete it->second;
         }
     }
 
