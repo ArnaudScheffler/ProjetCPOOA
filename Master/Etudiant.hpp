@@ -77,7 +77,7 @@ public:
    *\param c Le cours auquel l'etudiant veut s'inscrire
    *
    */
-    void inscrire(Cours& c) { c.addEtudiantP(*this); listeCours.push_back(&c); }
+    void inscrire(Cours& c) { c.addEtudiant(*this); listeCours.push_back(&c); }
 
   /**
    *\fn void desinscrire(Cours& c) 

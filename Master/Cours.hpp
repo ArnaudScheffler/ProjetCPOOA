@@ -98,7 +98,7 @@ public:
    *\return std::list<Etudiant*>
    *
    */
-    std::list<Etudiant*> getListeEtudiantP() { return listeEtudiant; }
+    std::list<Etudiant*> getListeEtudiantP() { return listeEtudiantP; }
 
 
   /**
