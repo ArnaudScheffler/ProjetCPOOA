@@ -44,7 +44,9 @@ public:
    *
    */
 	Cours(std::string nom, std::string dateDebut, std::string dateFin, std::string dateFinInscription, int nbPlace)
-: nom(nom), dateDebut(dateDebut), dateFin(dateFin), dateFinInscription(dateFinInscription), nbPlace(nbPlace), enseignant(NULL) {}
+: nom(nom), dateDebut(dateDebut), dateFin(dateFin), dateFinInscription(dateFinInscription), nbPlace(nbPlace), enseignant(NULL) {
+	  validation=false;
+	}
   /*
    *\fn std::string getNom()
    *\brief Renvoie le nom du cours

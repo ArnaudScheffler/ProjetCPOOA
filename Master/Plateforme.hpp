@@ -15,6 +15,7 @@
 
 #include "Cours.hpp"
 #include "Enseignant.hpp"
+#include "Admin.hpp"
 
 /**
  *\class Plateform
@@ -26,6 +27,7 @@ private:
 	std::map<std::string, Cours*> mapCours;
 	std::map<std::string, Etudiant*> mapEtudiant;
 	std::map<std::string, Enseignant*> mapEnseignant;
+  std::map<std::string, Admin*> mapAdmin;
 
 public:
 
@@ -150,6 +152,8 @@ public:
 		}
 		return stringstream.str();
 	}
+
+  void addAdmin(Admin& a){ mapAdmin.insert(std::make_pair(a.getLogin(), &a)); }
 
     void vider(){
 //        for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {

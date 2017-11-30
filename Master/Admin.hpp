@@ -34,3 +34,6 @@ public:
   void validerCours(Cours &c){
     c.setValidation(true);
   }
+
+};
+#endif /* COURS_HPP_ */
