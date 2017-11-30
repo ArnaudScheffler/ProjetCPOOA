@@ -13,6 +13,7 @@
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
 #include "Plateforme.hpp"
+#include "Admin.hpp"
 
 /**
  *\fn void pause()
@@ -46,6 +47,8 @@ int main() {
     Cours cdef = Cours("CPOOA", "", "", "", 10);
     endef.proposerUnCours(cdef);
     p.addCours(cdef);
+
+    Admin adm= Admin("admin","pass");
 
 	while (!quit){
 		std::cout << "\nBienvenue dans notre menu ! Choisissez votre action :"

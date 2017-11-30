@@ -29,6 +29,7 @@ private:
   Enseignant* enseignant;//Enseignant responsable du cours
   std::list<Etudiant*> listeEtudiantP;
   std::list<Etudiant*> listeEtudiantA;
+  bool validation;
 
 
 public:
@@ -40,7 +41,6 @@ public:
    *\param dateFin Date de fin du cours
    *\param dateFinInscription Date de fin d'inscription au cours
    *\param nbPlace Nombre de place disponible pour le cours
-   *
    *
    */
 	Cours(std::string nom, std::string dateDebut, std::string dateFin, std::string dateFinInscription, int nbPlace)
@@ -115,6 +115,15 @@ public:
         }
     }
 
+  /**
+   *\fn void setValidation(bool b)
+   *\brief Setter pour l'attribut validation
+   *\param b Valeur du boolean
+   *
+   */
+  void setValidation(bool b){
+    validation=b;
+  }
   
     //Pour utiliser liste.remove on doit définir un opérateur d'égalité pour nos classes
 
