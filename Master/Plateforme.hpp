@@ -156,14 +156,13 @@ public:
   void addAdmin(Admin& a){ mapAdmin.insert(std::make_pair(a.getLogin(), &a)); }
 
     void vider(){
-//        for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
-//            delete &it;
-//        }
-//        for(std::map<std::string, Cours*>::iterator it = mapCours.begin(); it != mapCours.end(); it++) {
-//            delete &it;
-//        }
+        for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
+            delete &it;
+        }
+        for(std::map<std::string, Cours*>::iterator it = mapCours.begin(); it != mapCours.end(); it++) {
+            delete &it;
+        }
         for(std::map<std::string, Etudiant*>::iterator it = mapEtudiant.begin(); it != mapEtudiant.end(); it++) {
-            std::cout << "Suppression : " << (*it).second->getLogin() << std::endl;
             delete (*it).second;
         }
     }
