@@ -30,8 +30,8 @@ public:
 	bool verifMDP(const std::string mdp) { return mdp.compare(motDePasse) == 0 ? true : false; }
     std::list<Cours*>::iterator getPremierCours() { return listeCours.begin(); }
     std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); }
-    void inscrire(Cours& c) { c.addEtudiantP(*this); listeCours.push_back(&c); }
-    void desinscrire(Cours& c) { listeCours.remove(&c); }
+    void inscrire(Cours& c) { c.addEtudiant(*this); listeCours.push_back(&c); }
+    void desinscrire(Cours& c) { c.removeEtudiant(*this); listeCours.remove(&c); }
 	std::string afficherCours(){
 		std::stringstream stringstream;
 		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {

@@ -24,7 +24,8 @@ private:
 	std::string dateFinInscription;
 	int nbPlace;
 	Enseignant* enseignant;
-	std::list<Etudiant*> listeEtudiant;
+    std::list<Etudiant*> listeEtudiantP;
+    std::list<Etudiant*> listeEtudiantA;
 
 public:
 	// Vérifier la passage par référence
@@ -36,8 +37,21 @@ public:
 	Enseignant& getEnseignant() { return *enseignant ;}
 
 	const std::string getLoginEnseignant();
-    std::list<Etudiant*> getListeEtudiantP() { return listeEtudiant; }
-    void addEtudiantP(Etudiant& etu){ listeEtudiant.push_back(&etu); }
+    std::list<Etudiant*> getListeEtudiantP() { return listeEtudiantP; }
+    void addEtudiant(Etudiant& etu){
+        if (listeEtudiantP.size() >= (size_t)nbPlace){
+            listeEtudiantA.push_back(&etu);
+        }else{
+            listeEtudiantP.push_back(&etu);
+        }
+    }
+    void removeEtudiant(Etudiant& etu){
+        listeEtudiantA.remove(&etu);
+        listeEtudiantP.remove(&etu);
+        if (listeEtudiantP.size() < (size_t)nbPlace){
+            listeEtudiantP.push_back(*listeEtudiantA.begin());
+        }
+    }
 
     //Pour utiliser liste.remove on doit définir un opérateur d'égalité pour nos classes
     bool operator==( const Cours& test ) const {

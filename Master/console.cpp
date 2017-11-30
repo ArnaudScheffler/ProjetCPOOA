@@ -21,7 +21,7 @@ void pause(){
 	std::cin.get();
 }
 
-int main(int argc, char **argv) {
+int main() {
 	bool quit = false;
 	int choice = -1;
 	Plateforme p = Plateforme();
