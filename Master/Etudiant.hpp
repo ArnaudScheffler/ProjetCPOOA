@@ -14,6 +14,7 @@
 #include <string>
 
 #include "Cours.hpp"
+
 /**
  *\class Etudiant
  */
@@ -25,6 +26,7 @@ protected:
 	std::list<Cours*> listeCours;
 
 public:
+
   /**
    *\fn Etudiant(std::string login, std::string motDePasse)
    *\brief Constructeur de l'objet Etudiant
@@ -41,6 +43,7 @@ public:
    *
    */
 	const std::string getLogin() { return login; }
+
   /**
    *\fn const std::string getMDP()
    *\brief Renvoie le mot de passe de l'etudiant
@@ -57,6 +60,7 @@ public:
    *
    */
 	bool verifMDP(const std::string mdp) { return mdp.compare(motDePasse) == 0 ? true : false; }
+
   /**
    *\fn std::list<Cours*>::iterator getPremierCours()
    *\brief Renvoie un iterateur sur les cours depuis le premier element de la liste
@@ -64,13 +68,15 @@ public:
    *
    */
     std::list<Cours*>::iterator getPremierCours() { return listeCours.begin(); }
+
   /**
    *\fn std::list<Cours*>::iterator getDernierCours()
    *\brief Renvoie un iterateur sur les cours depuis le dernier element de la liste
    *\return std::list<Cours*>::iterator
    *
    */
-  std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); }
+    std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); }
+
   /**
    *\fn void inscrire(Cours& c)
    *\brief Permet a un etudiant de s'inscrire a un cours
@@ -85,14 +91,14 @@ public:
    *\param c Le cours auquel l'etudiant veut se desinscire 
    *
    */
-  void desinscrire(Cours& c) { c.removeEtudiant(*this);listeCours.remove(&c); }
+    void desinscrire(Cours& c) { c.removeEtudiant(*this);listeCours.remove(&c); }
+
   /**
    *\fn	std::string afficherCours()
    *\brief Renvoie un string qui contient tous les cours auquel l'etudiant est inscrit
    *\return std::string
    *
    */
-
 	std::string afficherCours(){
 		std::stringstream stringstream;
 		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
@@ -100,6 +106,7 @@ public:
 		}
 		return stringstream.str();
 	}
+
   /**
    *\fn bool operator==( const Etudiant& test ) const
    *\brief Redefinition de l'operateur == pour pouvoir l'utiliser sur des etudiants

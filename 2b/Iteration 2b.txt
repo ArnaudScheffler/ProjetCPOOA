@@ -1,4 +1,4 @@
-Par rapport a l'iteration 1, On a ajouté un menu dans la console pour pouvoir faire des tests sur les methodes sans les appeller les unes après les autres. Cepandant au vu du gros changement du menu du fait de l'utilisation de la plateforme, on à découpé l'iteration en deux morceaux :
+Par rapport a l'iteration 1, On a ajoutÃ© un menu dans la console pour pouvoir faire des tests sur les methodes sans les appeller les unes aprÃ¨s les autres. Cepandant au vu du gros changement du menu du fait de l'utilisation de la plateforme, on Ã  dÃ©coupÃ© l'iteration en deux morceaux :
 -2a menu testant les methodes d'Enseignant/Etudiant/Cours sans la plate-forme.
 -2b menu testant les classes au travers de la plate-forme.
  Le diagramme de classe ne change pas.

@@ -13,6 +13,7 @@
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
 #include "Plateforme.hpp"
+
 /**
  *\fn void pause()
  *\brief Met l'interface en attente
@@ -33,8 +34,19 @@ void pause(){
 int main() {
 	bool quit = false;
 	int choice = -1;
+
 	Plateforme p = Plateforme();
-	Enseignant endef = Enseignant("Gautier", "pass");
+
+    Enseignant endef = Enseignant("Gautier", "pass");
+    p.addEnseignant(endef);
+
+    Etudiant etudef = Etudiant("Elliot", "pass");
+    p.addEtudiant(etudef);
+
+    Cours cdef = Cours("CPOOA", "", "", "", 10);
+    endef.proposerUnCours(cdef);
+    p.addCours(cdef);
+
 	while (!quit){
 		std::cout << "\nBienvenue dans notre menu ! Choisissez votre action :"
 				<< "\n\t [0] - Quitter"
@@ -42,13 +54,13 @@ int main() {
                 << "\n\t [2] - Créer un Etudiant (et l'ajouter à la plate-forme)"
                 << "\n\t [3] - Créer un Cours (et l'ajouter à la plate-forme)"
                 << "\n\t [4] - Faire proposer un Cours à un enseignant"
-				<< "\n\t [5] - Faire s'inscrire a un Cours un étudiant"
-				<< "\n\t [6] - Faire se desinscrire a un Cours un étudiant"
+                << "\n\t [5] - Inscrire un étudiant à un cours"
+                << "\n\t [6] - Désinscrire un étudiant à un cours"
 				<< "\n\t [7] - Afficher les cours propose par un enseignant"
 				<< "\n\t [8] - Afficher les cours d'un étudiant"
-                << "\n\t [9] - Afficher la liste des étudiants de la plate-forme"
-                << "\n\t [10] - Afficher la liste des enseignants de la plate-forme"
-    			<< "\n\t [11] - Afficher la liste des cours de la plate-forme"
+                << "\n\t [9] - Liste des étudiants de la plate-forme"
+                << "\n\t [10] - Liste des enseignants de la plate-forme"
+                << "\n\t [11] - Liste des cours de la plate-forme"
 				<< std::endl;
 		std::cin >> choice ;
 
@@ -114,102 +126,95 @@ int main() {
 				break;
 			}
 			case 4:{
+                std::string nomEnseignant = "";
                 std::string nomCours = "";
-				std::string nomEnseignant = "";
-				std::cout << "Compris !\nEntrez le nom d'un Cours de la PA :\n" << p.afficherCours() <<std::endl;
-				std::cin >> nomCours;
-				Cours& coursrecup = p.getCoursParNom(nomCours);
-				/*while(coursrecup){
-                    std::cout << "Impossible de trouver le cours donné : " << p.afficherCours() <<std::endl;
-                    pause();
+
+                std::cout << "Compris !\nListe des Enseignants :\n" << p.afficherEnseignant() << "Login : ";
+                std::cin >> nomEnseignant;
+                if (p.containsEnseignant(nomCours)) {
+                    std::cout << "Merci !\nListe des cours :\n" << p.afficherCours() << "Nom du cours : ";
                     std::cin >> nomCours;
-				}*/
-                std::cout << "Merci !\nEntrez le nom d'un Enseignant de la PA :\n" << p.afficherEnseignant() <<std::endl;
-				std::cin >> nomEnseignant;
-				Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
-				/*while(ensrecup == null){
-                    std::cout << "Impossible de trouver l'enseignant donné : " << p.afficherEnseignant() <<std::endl;
-                    pause();
-                    std::cin >> nomEnseignant;
-				}*/
-				ensrecup.proposerUnCours(coursrecup);
-				std::cout << "Resultat :\n" << ensrecup.getLogin()<< " à desormais les cours :\n" <<ensrecup.afficherCoursPropose() << std::endl;
+                    if (p.containsCours(nomCours)) {
+                        Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
+                        Cours& coursrecup = p.getCoursParNom(nomCours);
+                        ensrecup.proposerUnCours(coursrecup);
+                        std::cout << "Resultat :\n" << ensrecup.getLogin()<< " à desormais les cours :\n" <<ensrecup.afficherCoursPropose() << std::endl;
+                    } else
+                        std::cout << "Le cours n'éxiste pas !" << std::endl;
+                } else
+                    std::cout << "L'enseignant n'éxiste pas !" << std::endl;
+
 				pause();
 				break;
 			}
 			case 5:{
+                std::string nomEtudiant = "";
                 std::string nomCours = "";
-				std::string nomEtudiant = "";
-				std::cout << "Compris !\nEntrez le nom d'un Cours de la PA :\n" << p.afficherCours() <<std::endl;
-				std::cin >> nomCours;
-				Cours& coursrecup = p.getCoursParNom(nomCours);
-				/*while(coursrecup){
-                    std::cout << "Impossible de trouver le cours donné : " << p.afficherCours() <<std::endl;
-                    pause();
+
+                std::cout << "Compris !\nListe des Etudiant :\n" << p.afficherEtudiant() << "Login : ";
+                std::cin >> nomEtudiant;
+                if (p.containsEtudiant(nomEtudiant)) {
+                    std::cout << "Merci !\nListe des cours :\n" << p.afficherCours() << "Nom du cours : ";
                     std::cin >> nomCours;
-				}*/
-                std::cout << "Merci !\nEntrez le nom d'un Etudiant de la PA :\n" << p.afficherEtudiant() <<std::endl;
-				std::cin >> nomEtudiant;
-				Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
-				/*while(ensrecup == null){
-                    std::cout << "Impossible de trouver l'enseignant donné : " << p.afficherEnseignant() <<std::endl;
-                    pause();
-                    std::cin >> nomEnseignant;
-				}*/
-				eturecup.inscrire(coursrecup);
-				std::cout << "Resultat :\n" << eturecup.getLogin()<< " à desormais les cours :\n" <<eturecup.afficherCours() << std::endl;
+                    if (p.containsCours(nomCours)) {
+                        Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
+                        Cours& coursrecup = p.getCoursParNom(nomCours);
+                        eturecup.inscrire(coursrecup);
+                        std::cout << "Resultat :\n" << eturecup.getLogin()<< " à desormais les cours :\n" <<eturecup.afficherCours() << std::endl;
+                    } else
+                        std::cout << "Le cours n'éxiste pas !" << std::endl;
+                } else
+                    std::cout << "L'étudiant n'éxiste pas !" << std::endl;
+
 				pause();
 				break;
 			}
 			case 6:{
                 std::string nomCours = "";
 				std::string nomEtudiant = "";
-				std::cout << "Compris !\nEntrez le nom d'un Cours de la PA :\n" << p.afficherCours() <<std::endl;
-				std::cin >> nomCours;
-				Cours& coursrecup = p.getCoursParNom(nomCours);
-				/*while(coursrecup){
-                    std::cout << "Impossible de trouver le cours donné : " << p.afficherCours() <<std::endl;
-                    pause();
+
+                std::cout << "Compris !\nListe des Etudiant :\n" << p.afficherEtudiant() << "Login : ";
+                std::cin >> nomEtudiant;
+                if (p.containsEtudiant(nomEtudiant)) {
+                    std::cout << "Merci !\nListe des cours :\n" << p.afficherCours() << "Nom du cours : ";
                     std::cin >> nomCours;
-				}*/
-                std::cout << "Merci !\nEntrez le nom d'un Etudiant de la PA :\n" << p.afficherEtudiant() <<std::endl;
-				std::cin >> nomEtudiant;
-				Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
-				/*while(ensrecup == null){
-                    std::cout << "Impossible de trouver l'enseignant donné : " << p.afficherEnseignant() <<std::endl;
-                    pause();
-                    std::cin >> nomEnseignant;
-				}*/
-				eturecup.desinscrire(coursrecup);
-				std::cout << "Resultat :\n" << eturecup.getLogin()<< " à desormais les cours :\n" <<eturecup.afficherCours() << std::endl;
-				pause();
+                    if (p.containsCours(nomCours)) {
+                        Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
+                        Cours& coursrecup = p.getCoursParNom(nomCours);
+                        eturecup.desinscrire(coursrecup);
+                        std::cout << "Resultat :\n" << eturecup.getLogin()<< " à desormais les cours :\n" <<eturecup.afficherCours() << std::endl;
+                    } else
+                        std::cout << "Le cours n'éxiste pas !" << std::endl;
+                } else
+                    std::cout << "L'étudiant n'éxiste pas !" << std::endl;
+
+                pause();
 				break;
 			}
 			case 7:{
 				std::string nomEnseignant = "";
-				std::cout << "Compris !\nEntrez le nom d'un Enseignant de la PA :\n" << p.afficherEnseignant() <<std::endl;
+                std::cout << "Compris !\nListe des enseignants :\n" << p.afficherEnseignant() << "Login : ";
 				std::cin >> nomEnseignant;
-				Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
-				/*while(ensrecup == null){
-                    std::cout << "Impossible de trouver l'enseignant donné : " << p.afficherEnseignant() <<std::endl;
-                    pause();
-                    std::cin >> nomEnseignant;
-				}*/
-				std::cout << "Cours proposé de l'enseignant " << ensrecup.getLogin() << " :\n" << ensrecup.afficherCoursPropose() << std::endl;
+
+                if (p.containsEnseignant(nomEnseignant)) {
+                    Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
+                    std::cout << "Cours proposé par l'enseignant " << ensrecup.getLogin() << " :\n" << ensrecup.afficherCoursPropose() << std::endl;
+                } else
+                    std::cout << "L'enseignant n'éxiste pas !" << std::endl;
+
 				pause();
 				break;
 			}
 			case 8:{
                 std::string nomEtudiant = "";
-                std::cout << "Compris !\nEntrez le nom d'un Etudiant de la PA :\n" << p.afficherEtudiant() <<std::endl;
+                std::cout << "Compris !\nListe des étudiants :\n" << p.afficherEtudiant() << "Login : " ;
 				std::cin >> nomEtudiant;
-				Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
-				/*while(ensrecup == null){
-                    std::cout << "Impossible de trouver l'enseignant donné : " << p.afficherEnseignant() <<std::endl;
-                    pause();
-                    std::cin >> nomEnseignant;
-				}*/
-				std::cout << "Cours de l'etudiant :\n" << eturecup.getLogin()<< " à desormais les cours :\n" <<eturecup.afficherCours() << std::endl;
+                if (!p.containsEtudiant(nomEtudiant))
+                    std::cout << "L'étudiant n'existe pas !" << std::endl;
+                else {
+                    Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
+                    std::cout << "Cours de l'etudiant :\n" << eturecup.getLogin()<< " a les cours :\n" <<eturecup.afficherCours() << std::endl;
+                }
 				pause();
 				break;
 			}
