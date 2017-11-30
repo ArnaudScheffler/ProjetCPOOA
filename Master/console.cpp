@@ -61,6 +61,7 @@ int main() {
                 << "\n\t [9] - Liste des étudiants de la plate-forme"
                 << "\n\t [10] - Liste des enseignants de la plate-forme"
                 << "\n\t [11] - Liste des cours de la plate-forme"
+                << "\n\t [666] - Détruire la plate-forme"
 				<< std::endl;
 		std::cin >> choice ;
 
@@ -233,6 +234,11 @@ int main() {
 				pause();
 				break;
 			}
+            case 666:{
+                p.~Plateforme();
+                pause();
+                break;
+            }
 			default:{
                 std::cout << "Entrée non reconnue, veuillez réessayer." << std::endl;
 				pause();

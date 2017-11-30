@@ -23,7 +23,7 @@ class Etudiant {
 protected:
 	std::string login;
 	std::string motDePasse;
-	std::list<Cours*> listeCours;
+    std::list<Cours*> listeCours;
 
 public:
 
@@ -86,9 +86,9 @@ public:
     void inscrire(Cours& c) { c.addEtudiant(*this); listeCours.push_back(&c); }
 
   /**
-   *\fn void desinscrire(Cours& c) 
+   *\fn void desinscrire(Cours& c)
    *\brief Permet a un etudiant de se desinscrire d'un cours
-   *\param c Le cours auquel l'etudiant veut se desinscire 
+   *\param c Le cours auquel l'etudiant veut se desinscire
    *
    */
     void desinscrire(Cours& c) { c.removeEtudiant(*this);listeCours.remove(&c); }
@@ -99,13 +99,13 @@ public:
    *\return std::string
    *
    */
-	std::string afficherCours(){
-		std::stringstream stringstream;
-		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
+    std::string afficherCours(){
+        std::stringstream stringstream;
+        for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
             stringstream << (*it)->getNom() <<" Auteur : " << (*it)->getLoginEnseignant() << std::endl;
-		}
-		return stringstream.str();
-	}
+        }
+        return stringstream.str();
+    }
 
   /**
    *\fn bool operator==( const Etudiant& test ) const

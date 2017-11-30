@@ -17,7 +17,7 @@
 class Enseignant : public Etudiant {
 
 private:
-	std::list<Cours*> listeCoursPropose;
+    std::list<Cours*> listeCoursPropose;
 
 public:
   /**
