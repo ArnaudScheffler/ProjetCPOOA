@@ -1,8 +1,8 @@
 /*
- * Cours.cpp
+ * \file Cours.cpp
  *
- *  Created on: 11 nov. 2017
- *      Author: EVA
+ * \date 11 nov. 2017
+ * \author EVA
  */
 
 #include "Cours.hpp"

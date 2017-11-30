@@ -1,0 +1,7 @@
+/* Modification des styles par défaut de Doxygen */
+
+dl.warning, dl.attention { border-color: #FFA500; }
+/* orange, défaut = #FF0000, rouge */
+
+dl.pre { border-color: #FF0000; }
+/* rouge, défaut = #00D000, vert foncé */

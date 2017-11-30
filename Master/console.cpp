@@ -1,8 +1,8 @@
 /*
- * main.cpp
+ * \file main.cpp
  *
- *  Created on: 1 nov. 2017
- *      Author: EVA
+ * \date 1 nov. 2017
+ * \author EVA
  */
 
 #include <iostream>
@@ -13,7 +13,11 @@
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
 #include "Plateforme.hpp"
-
+/**
+ *\fn void pause()
+ *\brief Met l'interface en attente
+ *
+ */
 void pause(){
 	std::cout << "Appuyez sur une touche pour continuer..." << std::endl;
     std::cin.clear();
@@ -21,6 +25,11 @@ void pause(){
 	std::cin.get();
 }
 
+/**
+ *\fn int main()
+ *\brief Affiche la console
+ *\return int
+ */
 int main() {
 	bool quit = false;
 	int choice = -1;
