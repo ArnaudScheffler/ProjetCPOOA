@@ -88,9 +88,23 @@ public:
 	}
 
     /**
+     * @brief afficherCoursInvalide
+     * @return std::string avec les cours non validés
+     */
+    std::string afficherCoursInvalide() {
+        std::stringstream stringstream;
+        for(std::map<std::string, Cours*>::iterator it = mapCours.begin(); it != mapCours.end(); it++) {
+            if( !((*it).second->getStatus()) ){
+                stringstream << (*it).second->getNom() <<" Auteur : " << (*it).second->getLoginEnseignant() << std::endl;
+            }
+        }
+        return stringstream.str();
+    }
+
+    /**
      *\fn void addEtudiant(Etudiant& e)
      *\brief Ajoute un etudiant la plateforme
-     *\param e L'etudiant a ajouter a la plateforme
+     *\param e L'etudiant à ajouter à la plateforme
      *
      */
 	void addEtudiant(Etudiant& e) { mapEtudiant.insert(std::make_pair(e.getLogin(), &e)); }
@@ -99,7 +113,7 @@ public:
 
     /**
      *\fn Etudiant& getEtudiantParLogin(const std::string login)
-     *\brief Renvoie l'etudiant a partir de son login
+     *\brief Renvoie l'etudiant à partir de son login
      *\param login Login de l'etudiant recherche
      *\return Etudiant&
      *
@@ -153,9 +167,43 @@ public:
 		return stringstream.str();
 	}
 
-  void addAdmin(Admin& a){ mapAdmin.insert(std::make_pair(a.getLogin(), &a)); }
 
-    void vider(){
+    void addAdmin(Admin& a){ mapAdmin.insert(std::make_pair(a.getLogin(), &a)); }
+
+    /**
+     * @brief containsAdmin
+     * @param login
+     * @return true si l'admin existe
+     */
+    bool containsAdmin(std::string login) { return !(mapAdmin.find(login) == mapAdmin.end()); }
+
+    /**
+     *\fn Admin& getAdminparLogin(const std::string login)
+     *\brief Renvoie un Admin a partir de son login
+     *\param login Login de l'admin recherche
+     *\return Admin&
+     *
+     */
+    Admin& getAdminparLogin(const std::string login) { return *mapAdmin[login]; }
+
+    /**
+     *\fn std::string afficherAdmin()
+     *\brief Renvoie un string contenant tous les Admin de la plateforme
+     *\return std::string
+     *
+     */
+    std::string afficherAdmin() {
+        std::stringstream stringstream;
+        for(std::map<std::string, Admin*>::iterator it = mapAdmin.begin(); it != mapAdmin.end(); it++) {
+            stringstream << (*it).second->getLogin() << std::endl;
+        }
+        return stringstream.str();
+    }
+
+    void vider() {
+        for(std::map<std::string, Admin*>::iterator it = mapAdmin.begin(); it != mapAdmin.end(); it++) {
+            delete it->second;
+        }
         for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
             delete it->second;
         }

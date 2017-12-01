@@ -17,8 +17,8 @@
 #include "Admin.hpp"
 
 //#define EFFACER "\ec"
-//#define EFFACER "\033c"
-#define EFFACER ""
+#define EFFACER "\033c"
+//#define EFFACER ""
 
 /**
  *\fn void pause()
@@ -85,6 +85,9 @@ int main() {
                   << "[10] - Liste des enseignants" << std::endl
                   << "[11] - Liste des cours" << std::endl
                   << "[12] - Liste des etudiants d'un cours" << std::endl
+                  << "[13] - Liste des admins de la plate-forme" << std::endl
+                  << "[14] - Créer un Admin" << std::endl
+                  << "[15] - Valider un cours" << std::endl;
                      ;
 
         /* Demande une valeur et la vérifie */
@@ -271,6 +274,46 @@ int main() {
                 std::cout << p.getCoursParNom(nomCours).afficherListesEtudiants() << std::endl;
             } else
                 std::cout << "Le cours n'existe pas !" << std::endl;
+            break;
+        }
+
+        case 13:{
+            std::cout << "Liste des admins de la plate-forme :\n" << p.afficherAdmin() << std::endl;
+            pause();
+            break;
+        }
+
+        case 14:{
+            Admin *adtest;
+            std::string login = "";
+            std::string mdp = "";
+            std::cout << "Entrez le login de l'Admin: ";
+            std::cin >> login;
+            std::cout << "Entrez le mot de passe de l'Admin : ";
+            std::cin >> mdp;
+            adtest = new Admin(login, mdp);
+            p.addAdmin(*adtest);
+            std::cout << "Votre admin : \nLogin : " << adtest->getLogin() <<"\nMDP : " << adtest->getMDP() << "\nA été ajouté a la plate-forme." << std::endl;
+            //delete adtest;
+            break;
+        }
+        case 15:{
+            std::string nomAdmin = "";
+            std::string nomCours = "";
+            std::cout << "Liste des admins :\n" << p.afficherAdmin() << "Login : ";
+            std::cin >> nomAdmin;
+            if (p.containsAdmin(nomAdmin)) {
+                Admin& adrecup = p.getAdminparLogin(nomAdmin);
+                std::cout << "Liste des cours invalides :" << std::endl << p.afficherCoursInvalide() << "Nom du cours : ";
+                std::cin >> nomCours;
+                if (p.containsCours(nomCours)) {
+                    Cours& coursrecup = p.getCoursParNom(nomCours);
+                    adrecup.validerCours(coursrecup);
+                    std::cout << "L'etat de validation du cours " << coursrecup.getNom() << " est desomrais " << coursrecup.getStatus() << std::endl;
+                } else
+                    std::cout << "Le cours n'existe pas !" << std::endl;
+            } else
+                std::cout << "L'admin n'existe pas !" << std::endl;
             break;
         }
 

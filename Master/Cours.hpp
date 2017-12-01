@@ -81,6 +81,14 @@ public:
    */
   const std::string getLoginEnseignant();
 
+  /**
+   *\fn bool getStatus()
+   *\brief Renvoie le boolean de validité du cours
+   *\return boolean
+   *
+   */
+  bool getStatus() { return validation ;}
+
 
   /**
    *\fn void removeEtudiant(Etudiant& etu)
@@ -93,6 +101,7 @@ public:
         listeEtudiantP.remove(&etu);
         if (listeEtudiantP.size() < (size_t)nbPlace){
             listeEtudiantP.push_back(*listeEtudiantA.begin());
+            listeEtudiantA.remove(*listeEtudiantA.begin());
         }
     }
 
@@ -120,13 +129,13 @@ public:
         }
     }
 
-  /**
-   *\fn void setValidation(bool b)
-   *\brief Setter pour l'attribut validation
-   *\param b Valeur du boolean
-   *
-   */
-  void setValidation(bool b){ validation=b; }
+    /**
+     *\fn void setValidation(bool b)
+     *\brief Setter pour l'attribut validation
+     *\param b Valeur du boolean
+     *
+     */
+    void setValidation(bool b){ validation=b; }
   
   /**
    *\fn bool operator==( const Cours& test ) const
