@@ -35,18 +35,20 @@ std::string Cours::afficherListesEtudiants() {
     bool resteA = true;
     auto itP = listeEtudiantP.cbegin();
     auto itA = listeEtudiantA.cbegin();
+    stringstream << "Liste Principale : \t Liste D'attente : " << std::endl;
     while (resteP || resteA) {
         // Parcours et affichage de la liste principale
+        stringstream << "\t ";
         if (itP != listeEtudiantP.cend()) {
-            stringstream << "p : "<< (*itP)->getLogin();
+            stringstream << (*itP)->getLogin();
             itP++;
         } else
             resteP = false;
-        stringstream << "\t" << std::endl;
+        stringstream << "\t\t";
 
         // Parcours et affichage de la liste d'attente
         if (itA != listeEtudiantA.cend()) {
-            stringstream << "a : " << (*itA)->getLogin();
+            stringstream << "\t " << (*itA)->getLogin();
             itA++;
         } else
             resteA = false;

@@ -22,4 +22,5 @@ HEADERS += \
     Master/Cours.hpp \
     Master/Enseignant.hpp \
     Master/Etudiant.hpp \
-    Master/Plateforme.hpp
+    Master/Plateforme.hpp \
+    Master/rang.hpp

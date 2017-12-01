@@ -9,16 +9,22 @@
 #include <list>
 #include <limits>
 #include <stdlib.h>
-
+#include <stdio.h>
+#include "rang.hpp"
 #include "Cours.hpp"
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
 #include "Plateforme.hpp"
 #include "Admin.hpp"
 
+
 //#define EFFACER "\ec"
-#define EFFACER "\033c"
-//#define EFFACER ""
+//define EFFACER "\033c"
+#define EFFACER ""
+#define GREEN <<rang::fg::green
+#define RED <<rang::fg::red
+#define BLUE <<rang::fg::cyan
+#define RESET rang::style::reset<<
 
 /**
  *\fn void pause()
@@ -51,6 +57,10 @@ void remplir(Plateforme& p){
     p.addEtudiant(*etudef);
     etudef = new Etudiant("b", "pass");
     p.addEtudiant(*etudef);
+    etudef = new Etudiant("this4u", "pass");
+    p.addEtudiant(*etudef);
+    etudef = new Etudiant("jo", "pass");
+    p.addEtudiant(*etudef);
 
     Admin* adm = new Admin("admin","pass");
     p.addAdmin(*adm);
@@ -69,26 +79,25 @@ int main() {
     remplir(p);
 
     /* Affiche le menu de sélection */
-    std::cout << EFFACER << "Bienvenue dans notre menu !" << std::endl << std::endl;
+    std::cout << EFFACER GREEN << "Bienvenue dans notre menu !" << std::endl << std::endl;
     while (!quit) {
-        std::cout << "Choisissez une action :" << std::endl
-                  << "[0]  - Quitter" << std::endl
-                  << "[1]  - Créer un Enseignant" << std::endl
-                  << "[2]  - Créer un Etudiant" << std::endl
-                  << "[3]  - Créer un Cours" << std::endl
-                  << "[4]  - Faire proposer un Cours à un enseignant" << std::endl
-                  << "[5]  - Inscrire un étudiant à un cours" << std::endl
-                  << "[6]  - Désinscrire un étudiant à un cours" << std::endl
-                  << "[7]  - Afficher les cours propose par un enseignant" << std::endl
-                  << "[8]  - Afficher les cours d'un étudiant" << std::endl
-                  << "[9]  - Liste des étudiants" << std::endl
-                  << "[10] - Liste des enseignants" << std::endl
-                  << "[11] - Liste des cours" << std::endl
-                  << "[12] - Liste des etudiants d'un cours" << std::endl
-                  << "[13] - Liste des admins de la plate-forme" << std::endl
-                  << "[14] - Créer un Admin" << std::endl
-                  << "[15] - Valider un cours" << std::endl;
-                     ;
+        std::cout << "Choisissez une action :" << RESET std::endl
+                  BLUE << "[0]" << RESET "- Quitter" << std::endl
+                  BLUE << "[1]" << RESET "- Créer un Enseignant" << std::endl
+                  BLUE << "[2]" << RESET "- Créer un Etudiant" << std::endl
+                  BLUE << "[3]" << RESET "- Créer un Cours" << std::endl
+                  BLUE << "[4]" << RESET "- Faire proposer un Cours à un enseignant" << std::endl
+                  BLUE << "[5]" << RESET "- Inscrire un étudiant à un cours" << std::endl
+                  BLUE << "[6]" << RESET "- Désinscrire un étudiant à un cours" << std::endl
+                  BLUE << "[7]" << RESET "- Afficher les cours propose par un enseignant" << std::endl
+                  BLUE << "[8]" << RESET "- Afficher les cours d'un étudiant" << std::endl
+                  BLUE << "[9]" << RESET "- Liste des étudiants" << std::endl
+                  BLUE << "[10]" << RESET "- Liste des enseignants" << std::endl
+                  BLUE << "[11]" << RESET "- Liste des cours" << std::endl
+                  BLUE << "[12]" << RESET "- Liste des etudiants d'un cours" << std::endl
+                  BLUE << "[13]" << RESET "- Liste des admins de la plate-forme" << std::endl
+                  BLUE << "[14]" << RESET "- Créer un Admin" << std::endl
+                  BLUE << "[15]" << RESET "- Valider un cours" << std::endl;
 
         /* Demande une valeur et la vérifie */
         std::cin >> choice ;
@@ -111,7 +120,7 @@ int main() {
             std::cin >> mdp;
             entest = new Enseignant(login, mdp);
             p.addEnseignant(*entest);
-            std::cout << "Votre enseignant : \nLogin : " << entest->getLogin() <<"\nMDP : " << entest->getMDP() << "\nA été ajouté a la plate-forme." << std::endl;
+            std::cout GREEN << "Votre enseignant : \nLogin : " << entest->getLogin() <<"\nMDP : " << entest->getMDP() << "\nA été ajouté a la plate-forme." << RESET std::endl;
 
             break;
         }
@@ -125,7 +134,7 @@ int main() {
             std::cin >> mdp;
             etutest = new Etudiant(login, mdp);
             p.addEtudiant(*etutest);
-            std::cout << "Votre etudiant : \nLogin : " << etutest->getLogin() <<"\nMDP : " << etutest->getMDP() << "\nA été ajouté a la plate-forme." << std::endl;
+            std::cout GREEN << "Votre etudiant : \nLogin : " << etutest->getLogin() <<"\nMDP : " << etutest->getMDP() << "\nA été ajouté a la plate-forme." << RESET std::endl;
 
             break;
         }
@@ -153,9 +162,10 @@ int main() {
             if (p.containsEnseignant(nomEnseignant)) {
                 Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
                 ensrecup.proposerUnCours(*coutest);
-            }
-            p.addCours(*coutest);
-            std::cout << "Votre Cours : \nNom : " << coutest->getNom() <<"\nEnseingant auteur : " << coutest->getLoginEnseignant() << "\nA été ajouté a la plate-forme." << std::endl;
+                p.addCours(*coutest);
+                std::cout GREEN << "Votre Cours : \nNom : " << coutest->getNom() <<"\nEnseingant auteur : " << coutest->getLoginEnseignant() << "\nA été ajouté a la plate-forme." << RESET std::endl;
+            } else
+                std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
 
             break;
         }
@@ -174,9 +184,9 @@ int main() {
                     ensrecup.proposerUnCours(coursrecup);
                     std::cout << "Resultat :" << std::endl << ensrecup.getLogin()<< " à desormais les cours :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
                 } else
-                    std::cout << "Le cours n'éxiste pas !" << std::endl;
+                    std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
-                std::cout << "L'enseignant n'éxiste pas !" << std::endl;
+                std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
 
 
             break;
@@ -193,12 +203,15 @@ int main() {
                 if (p.containsCours(nomCours)) {
                     Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
                     Cours& coursrecup = p.getCoursParNom(nomCours);
-                    eturecup.inscrire(coursrecup);
-                    std::cout << "Resultat :" << std::endl << eturecup.getLogin()<< " à desormais les cours :" << std::endl << eturecup.afficherCours() << std::endl;
+                    if (coursrecup.getStatus()){
+                        eturecup.inscrire(coursrecup);
+                        std::cout << "Resultat :" << std::endl << eturecup.getLogin()<< " à desormais les cours :" << std::endl << eturecup.afficherCours() << std::endl;
+                    } else
+                        std::cout << "Le cours n'est pas encore validé !" << std::endl;
                 } else
-                    std::cout << "Le cours n'éxiste pas !" << std::endl;
+                    std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
-                std::cout << "L'étudiant n'éxiste pas !" << std::endl;
+                std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
 
 
             break;
@@ -219,9 +232,9 @@ int main() {
                     eturecup.desinscrire(coursrecup);
                     std::cout << "Resultat :" << std::endl << eturecup.getLogin()<< " à desormais les cours :" << std::endl <<eturecup.afficherCours() << std::endl;
                 } else
-                    std::cout << "Le cours n'éxiste pas !" << std::endl;
+                    std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
-                std::cout << "L'étudiant n'éxiste pas !" << std::endl;
+                std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
 
 
             break;
@@ -235,7 +248,7 @@ int main() {
                 Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
                 std::cout << "Cours proposé par l'enseignant " << ensrecup.getLogin() << " :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
             } else
-                std::cout << "L'enseignant n'éxiste pas !" << std::endl;
+                std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
 
 
             break;
@@ -245,7 +258,7 @@ int main() {
             std::cout << "Liste des étudiants :" << std::endl << p.afficherEtudiant() << "Login : " ;
             std::cin >> nomEtudiant;
             if (!p.containsEtudiant(nomEtudiant))
-                std::cout << "L'étudiant n'existe pas !" << std::endl;
+                std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
             else {
                 Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
                 std::cout << "Cours de l'etudiant :" << std::endl << eturecup.getLogin()<< " a les cours :" << std::endl <<eturecup.afficherCours() << std::endl;
@@ -273,7 +286,7 @@ int main() {
             if (p.containsCours(nomCours)) {
                 std::cout << p.getCoursParNom(nomCours).afficherListesEtudiants() << std::endl;
             } else
-                std::cout << "Le cours n'existe pas !" << std::endl;
+                std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             break;
         }
 
@@ -311,7 +324,7 @@ int main() {
                     adrecup.validerCours(coursrecup);
                     std::cout << "L'etat de validation du cours " << coursrecup.getNom() << " est desomrais " << coursrecup.getStatus() << std::endl;
                 } else
-                    std::cout << "Le cours n'existe pas !" << std::endl;
+                    std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
                 std::cout << "L'admin n'existe pas !" << std::endl;
             break;

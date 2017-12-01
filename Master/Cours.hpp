@@ -114,6 +114,13 @@ public:
      */
     std::list<Etudiant*> getListeEtudiantP() { return listeEtudiantP; }
 
+    /**
+     *\fn std::list<Etudiant*> getListeEtudiantA()
+     *\brief Renvoie la liste des etudiant sur la liste d'attente d'inscription au cours
+     *\return std::list<Etudiant*>
+     *
+     */
+    std::list<Etudiant*> getListeEtudiantA() { return listeEtudiantA; }
 
     /**
      *\fn void addEtudiant(Etudiant& etu)
@@ -122,10 +129,12 @@ public:
      *
      */
     void addEtudiant(Etudiant& etu){
-        if (listeEtudiantP.size() >= (size_t)nbPlace){
-            listeEtudiantA.push_back(&etu);
-        }else{
-            listeEtudiantP.push_back(&etu);
+        if (getStatus()){
+            if (listeEtudiantP.size() >= (size_t)nbPlace){
+                listeEtudiantA.push_back(&etu);
+            }else{
+                listeEtudiantP.push_back(&etu);
+            }
         }
     }
 
