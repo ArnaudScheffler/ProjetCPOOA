@@ -10,11 +10,14 @@ console: Cours.o console.cpp
 %.o: %.cpp %.hpp
 	$(C) $(CFLAGS) -c $<
 
-clean:
-	rm -f $(FILE)
+doc:
+	doxygen
 
-mrproper: clean
-	rm -f console
+clean: clean_doc
+	rm -f $(FILE) console
+
+clean_doc:
+	rm -rf html/
 
 #Affichage des varriables
 print-%  : ; @echo $* = $($*)

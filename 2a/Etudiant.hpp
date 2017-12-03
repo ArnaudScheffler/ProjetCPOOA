@@ -1,8 +1,8 @@
 /*
- * Etudiant.hpp
+ * @file Etudiant.hpp
  *
- *  Created on: 6 nov. 2017
- *      Author: EVA
+ * @date 6 nov. 2017
+ * @author EVA
  */
 
 #ifndef ETUDIANT_HPP_
@@ -15,6 +15,9 @@
 
 #include "Cours.hpp"
 
+/**
+ * @class Etudiant
+ */
 class Etudiant {
 
 protected:
@@ -23,23 +26,104 @@ protected:
 	std::list<Cours*> listeCours;
 
 public:
-    Etudiant(std::string login, std::string motDePasse) : login(login), motDePasse(motDePasse) {}
 
+	/**
+	 * @brief Constructeur de l'objet Etudiant
+	 * @param login 
+	 * @param motDePasse
+	 * @version 1
+	 *
+	 */
+	Etudiant(std::string login, std::string motDePasse) : login(login), motDePasse(motDePasse) {}
+
+	/**
+	 * @brief Renvoie le login de l'etudiant
+	 * @return const std::string
+	 * @version 1
+	 *
+	 */
 	const std::string getLogin() { return login; }
+
+	/**
+	 * @brief Renvoie le mot de passe de l'etudiant
+	 * @return const std::string
+	 * @version 1
+	 *
+	 */
 	const std::string getMDP() { return motDePasse; }
+
+	/**
+	 * @brief Comparaison du mot de passe de l'etudiant et celui donné en parametre
+	 * @param mdp Le mot de passe a verifier
+	 * @return bool
+	 * @version 1
+	 *
+	 */
 	bool verifMDP(const std::string mdp) { return mdp.compare(motDePasse) == 0 ? true : false; }
-    std::list<Cours*>::iterator getPremierCours() { return listeCours.begin(); }
-    std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); }
-    void inscrire(Cours& c) { c.addEtudiantP(*this); listeCours.push_back(&c); }
-    void desinscrire(Cours& c) { listeCours.remove(&c); }
+
+	/**
+	 * @brief Renvoie un iterateur sur les cours depuis le premier element de la liste
+	 * @return std::list<Cours*>::iterator
+	 * @version 1
+	 *
+	 */
+	std::list<Cours*>::iterator getPremierCours() { return listeCours.begin(); }
+
+	/**
+	 * @brief Renvoie un iterateur sur les cours depuis le dernier element de la liste
+	 * @return std::list<Cours*>::iterator
+	 * @version 1
+	 *
+	 */
+	std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); }
+
+	/**
+	 * @brief Permet a un etudiant de s'inscrire a un cours
+	 * @param c Le cours auquel l'etudiant veut s'inscrire
+	 * @version 1
+	 *
+	 */
+	void inscrire(Cours& c) {
+		bool inscrit = false;
+		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
+			if( ((*it)->getNom()) == c.getNom() ){
+				inscrit = true;
+			}
+		}
+		if(!inscrit){
+			c.addEtudiantP(*this);
+			listeCours.push_back(&c);
+		}
+	}
+
+	/**
+	 * @brief Permet a un etudiant de se desinscrire d'un cours
+	 * @param c Le cours auquel l'etudiant veut se desinscire
+	 * @version 2a
+	 *
+	 */
+	void desinscrire(Cours& c) { c.removeEtudiant(*this);listeCours.remove(&c); }
+
+	/**
+	 * @brief Renvoie un string qui contient tous les cours auquel l'etudiant est inscrit
+	 * @return std::string
+	 * @version 1
+	 *
+	 */
 	std::string afficherCours(){
 		std::stringstream stringstream;
 		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
-            stringstream << (*it)->getNom() <<" Auteur : " << (*it)->getLoginEnseignant() << std::endl;
+			stringstream << (*it)->getNom() <<" Auteur : " << (*it)->getLoginEnseignant() << std::endl;
 		}
 		return stringstream.str();
 	}
-	//Pour utiliser liste.remove on doit déini un op?ateur d'éaglité pour nos classes
+
+	/**
+	 * @brief Redefinition de l'operateur == pour pouvoir l'utiliser sur des etudiants (dans liste.remove par exemple)
+	 * @return bool
+	 * @version 1
+	 *
+	 */
 	bool operator==( const Etudiant& test ) const  {
 		bool res = false;
 		if(this->login == test.login){
@@ -48,6 +132,5 @@ public:
 		return res;
 	}
 };
-
 
 #endif /* ETUDIANT_HPP_ */

@@ -30,7 +30,7 @@
  *\fn void pause()
  *\brief Met l'interface en attente
  */
-void pause(){
+void pauseMenu(){
     std::cout << "Appuyez sur une touche pour continuer..." << std::endl;
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -292,7 +292,6 @@ int main() {
 
         case 13:{
             std::cout << "Liste des admins de la plate-forme :\n" << p.afficherAdmin() << std::endl;
-            pause();
             break;
         }
 
@@ -334,7 +333,7 @@ int main() {
             std::cout << "Entrée non reconnue, veuillez réessayer." << std::endl;
             break;
         }
-        if (!quit) pause();
+        if (!quit) pauseMenu();
     }
     return 0;
 }
