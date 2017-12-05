@@ -1,6 +1,7 @@
 #include <QApplication>
 
 #include "ui_mainwindow.h"
+#include "mainwindow.h"
 
 int main(int argc, char **argv)
 {
@@ -14,7 +15,7 @@ int main(int argc, char **argv)
     */
 
     QApplication app(argc, argv);
-    QMainWindow *main = new QMainWindow;
+    MainWindow *main = new MainWindow;
     Ui::MainWindow ui;
     ui.setupUi(main);
 
