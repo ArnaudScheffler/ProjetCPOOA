@@ -18,10 +18,10 @@ void MainWindow::setPlateforme(Plateforme &p)
 
 void MainWindow::seConnecter()
 {
-    std::string login = ui->lineEdit->text().toStdString();
-    std::string mdp = ui->lineEdit_2->text().toStdString();
-    qDebug() << ui->lineEdit->text();
-    qDebug() << ui->lineEdit_2->text();
+    std::string login = ui->lineLogin->text().toStdString();
+    std::string mdp = ui->lineMdp->text().toStdString();
+    qDebug() << ui->lineLogin->text();
+    qDebug() << ui->lineMdp->text();
 
     if (plateforme->containsEtudiant(login) && plateforme->getEtudiantParLogin(login).verifMDP(mdp) ) {
         QMessageBox::information(this, tr("Connecté"), tr("Bienvenue !"));

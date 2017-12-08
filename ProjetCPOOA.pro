@@ -3,7 +3,7 @@
 
 #TEMPLATE    = app
 
-#CONFIG += c++11 console
+CONFIG += c++11 console
 #CONFIG -= app_bundle
 
 QT       += core gui
