@@ -22,7 +22,6 @@ void MainWindow::seConnecter()
     std::string mdp = ui->lineEdit_2->text().toStdString();
     qDebug() << ui->lineEdit->text();
     qDebug() << ui->lineEdit_2->text();
-    qDebug() << ui->lineEdit_2->text();
 
     if (plateforme->containsEtudiant(login) && plateforme->getEtudiantParLogin(login).verifMDP(mdp) ) {
         QMessageBox::information(this, tr("Connecté"), tr("Bienvenue !"));
