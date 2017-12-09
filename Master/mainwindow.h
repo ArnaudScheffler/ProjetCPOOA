@@ -25,6 +25,8 @@ private:
 
 public slots:
     void seConnecter();
+private slots:
+    void on_Precedent_clicked();
 };
 
 #endif // MAINWINDOW_H
