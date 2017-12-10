@@ -1,0 +1,8 @@
+To Do :
+
+Faire un adapateur entre la platefrome et les vues
+Ajouter une méthode ajouterCours(login, nomCours) dans Plateforme
+Factoriser le code dans plateforme
+Passer Plateforme en .cpp
+Placer les fichiers dans des dossiers
+Double click sur un cours pour ouvrir la vue du cours

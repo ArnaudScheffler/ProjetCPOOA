@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
@@ -136,7 +139,7 @@
                <string>Précédent</string>
               </property>
               <property name="autoDefault">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -289,8 +292,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>262</x>
-     <y>309</y>
+     <x>133</x>
+     <y>82</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -305,8 +308,8 @@
    <slot>seConnecter()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>539</x>
-     <y>309</y>
+     <x>133</x>
+     <y>82</y>
     </hint>
     <hint type="destinationlabel">
      <x>511</x>
@@ -337,12 +340,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>547</x>
-     <y>230</y>
+     <x>133</x>
+     <y>82</y>
     </hint>
     <hint type="destinationlabel">
-     <x>430</x>
-     <y>301</y>
+     <x>133</x>
+     <y>82</y>
     </hint>
    </hints>
   </connection>

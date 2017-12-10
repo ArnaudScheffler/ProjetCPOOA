@@ -23,17 +23,12 @@ void MainWindow::seConnecter()
 {
     std::string login = ui->lineLogin->text().toStdString();
     std::string mdp = ui->lineMdp->text().toStdString();
-    //qDebug() << ui->lineLogin->text();
-    //qDebug() << ui->lineMdp->text();
 
     if (plateforme->containsEtudiant(login) && plateforme->getEtudiantParLogin(login).verifMDP(mdp) ) {
         //QMessageBox::information(this, tr("Connecté"), tr("Bienvenue !"));
         //Passe a la page suivante
         QString home = QString::fromStdString("Bienvenue " + login + " !");
         ui->label_3->setText(home);
-
-        ui->listCours->setModel(NULL);
-        ui->listCoursSuivis->setModel(NULL);
 
         // Test afficher les cours suivis
         QStringListModel *modelCoursSuivis = new QStringListModel(this);
@@ -44,7 +39,6 @@ void MainWindow::seConnecter()
         }
         modelCoursSuivis->setStringList(listCoursSuivis);
         ui->listCoursSuivis->setModel(modelCoursSuivis);
-        ui->listCoursSuivis->setFocus();
 
         // Test  afficher tous les cours
         QStringListModel *modelCours = new QStringListModel(this);
