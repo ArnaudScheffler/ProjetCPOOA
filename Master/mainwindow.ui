@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>801</width>
-      <height>451</height>
+      <height>571</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -48,7 +48,14 @@
         <widget class="QLineEdit" name="lineLogin"/>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineMdp"/>
+        <widget class="QLineEdit" name="lineMdp">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_2">
@@ -78,8 +85,8 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>150</y>
+        <x>10</x>
+        <y>10</y>
         <width>501</width>
         <height>91</height>
        </rect>
@@ -96,9 +103,9 @@
      <widget class="QPushButton" name="Precedent">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>300</y>
-        <width>75</width>
+        <x>60</x>
+        <y>340</y>
+        <width>91</width>
         <height>23</height>
        </rect>
       </property>
@@ -109,6 +116,58 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>110</y>
+        <width>258</width>
+        <height>218</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Liste des cours :</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListView" name="listCours">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>110</y>
+        <width>258</width>
+        <height>218</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Liste des cours suivis :</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListView" name="listCoursSuivis">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -118,11 +177,29 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>true</bool>
+   </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionexit"/>
+   </widget>
+   <addaction name="menuFichier"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionexit">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>

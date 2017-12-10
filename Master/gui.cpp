@@ -10,10 +10,19 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     //init des composants de la fenêtre
     MainWindow main;
+
     Plateforme p;
+
+    Cours *cpooa = new Cours("CPOOA", "","","",10);
+    Cours *algo = new Cours("Algo", "", "", "", 13);
+    p.addCours(*cpooa);
+    p.addCours(*algo);
+
     Etudiant* etudef = new Etudiant("el", "pass");
     p.addEtudiant(*etudef);
     etudef = new Etudiant("a", "pass");
+    etudef->inscrire( *cpooa );
+    etudef->inscrire( *algo );
     p.addEtudiant(*etudef);
     etudef = new Etudiant("b", "pass");
     p.addEtudiant(*etudef);
@@ -21,6 +30,9 @@ int main(int argc, char **argv)
     p.addEtudiant(*etudef);
     etudef = new Etudiant("jo", "pass");
     p.addEtudiant(*etudef);
+
+
+
     main.setPlateforme(p);
     //afichage de la fenêtre
     main.show();
