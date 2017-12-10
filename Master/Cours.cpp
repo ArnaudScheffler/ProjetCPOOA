@@ -8,6 +8,7 @@
 #include "Cours.hpp"
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
+#include "Ressource.hpp"
 
 const std::string Cours::getLoginEnseignant() {
 	return enseignant->getLogin();
@@ -53,6 +54,14 @@ std::string Cours::afficherListesEtudiants() {
         } else
             resteA = false;
         stringstream << std::endl;
+    }
+    return stringstream.str();
+}
+
+std::string Cours::afficherListeRessource() {
+    std::stringstream stringstream;
+    for(auto it = mapRessource.cbegin(); it != mapRessource.cend();it++){
+        stringstream << ((*it).second)->getPath() << std::endl;
     }
     return stringstream.str();
 }

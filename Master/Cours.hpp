@@ -11,10 +11,13 @@
 
 #include <iostream>
 #include <list>
+#include <map>
+#include "Ressource.hpp"
 
 // Classes définies ici pour éviter l'inclusion circulaire
 class Enseignant; 
 class Etudiant;
+
 
 /**
  * @class Cours
@@ -31,6 +34,7 @@ private:
 	Enseignant* enseignant;//Enseignant responsable du cours
 	std::list<Etudiant*> listeEtudiantP;
 	std::list<Etudiant*> listeEtudiantA;
+	std::map<std::string, Ressource*> mapRessource;
 	bool validation;
 
 
@@ -137,6 +141,17 @@ public:
 		}
 	}
 
+	void addRessource(Ressource& r) { mapRessource.insert(std::make_pair(r.getPath(), &r)); }
+	
+	
+	void removeRessource(std::string r){
+		std::map<std::string, Ressource*>::iterator it;
+		it=mapRessource.find(r);
+		mapRessource.erase(it);
+	}
+	
+	
+	
 	/**
 	 * @brief Setter pour l'attribut validation
 	 * @param b Valeur du boolean
@@ -175,6 +190,11 @@ public:
 	 * @version 3
 	 */
 	std::string afficherListeA();
+	
+	
+	
+	
+	std::string afficherListeRessource();
 };
 
 #endif /* COURS_HPP_ */
