@@ -47,6 +47,9 @@ void remplir(Plateforme& p){
     Cours* cdef = new Cours("c", "", "", "", 2);
     p.addCours(*cdef);
 
+    Ressource *res = new Ressource("pdf", "./test.pdf");
+    cdef->addRessource(*res);
+
     Enseignant* endef = new Enseignant("ga", "pass");
     endef->proposerUnCours(*cdef);
     p.addEnseignant(*endef);
@@ -98,7 +101,7 @@ int main() {
                   BLUE << "[13]" << RESET "- Liste des admins de la plate-forme" << std::endl
                   BLUE << "[14]" << RESET "- Créer un Admin" << std::endl
                   BLUE << "[15]" << RESET "- Valider un cours" << std::endl
-				  BLUE << "[16]" << RESET "- Ajouter une ressource a un cours" << std::endl
+		  BLUE << "[16]" << RESET "- Ajouter une ressource a un cours" << std::endl
                   BLUE << "[17]" << RESET "- Supprimer une ressource d'un cours" << std::endl
                   BLUE << "[18]" << RESET "- Afficher les ressources d'un cours" << std::endl;
 
@@ -337,38 +340,50 @@ int main() {
             std::string type = "";
             std::string path = "";
             std::string nomCours="";
+            std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
             std::cout << "Entrez le nom du cours qui necessite une ressource : ";
             std::cin >> nomCours;
-            std::cout << "Entrez le type de ressource : ";
-            std::cin >> type;
-            std::cout << "Entrez le chemin du fichier : ";
-            std::cin >> path;
-            res = new Ressource(type, path);
-            Cours& coursrecup = p.getCoursParNom(nomCours);
-            coursrecup.addRessource(*res);
+            if (p.containsCours(nomCours)) {
+                std::cout << "Entrez le type de ressource : ";
+                std::cin >> type;
+                std::cout << "Entrez le chemin du fichier : ";
+                std::cin >> path;
+                res = new Ressource(type, path);
+                Cours& coursrecup = p.getCoursParNom(nomCours);
+                coursrecup.addRessource(*res);
+            } else
+                std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             break;
         }
 		//Supprimer une ressource d'un cours
         case 17:{
             std::string nomCours = "";
-            std::cout << "Nom du cours" << std::endl;
+            std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
+            std::cout << "Nom du cours ciblé" << std::endl;
             std::cin >> nomCours;
-            Cours& coursrecup = p.getCoursParNom(nomCours);
-            std::cout << "Liste des ressources :" << std::endl << coursrecup.afficherListeRessource() << std::endl;
-            std::string pathRessource;
-            std::cout << "Ressource a supprimer" << std::endl;
-            std::cin >> pathRessource;
-			coursrecup.removeRessource(pathRessource);
+            if (p.containsCours(nomCours)) {
+                Cours& coursrecup = p.getCoursParNom(nomCours);
+                std::cout << "Liste des ressources :" << std::endl << coursrecup.afficherListeRessource() << std::endl;
+                std::string pathRessource;
+                std::cout << "Entrez une ressource a supprimer" << std::endl;
+                std::cin >> pathRessource;
+                coursrecup.removeRessource(pathRessource);
+           } else
+                std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             break;
         }
 		//Afficher les ressources d'un cours
         case 18:{
             std::string nomCours = "";
-            std::cout << "Nom du cours" << std::endl;
+            std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
+            std::cout << "Nom du cours ciblé" << std::endl;
             std::cin >> nomCours;
-            Cours& coursrecup = p.getCoursParNom(nomCours);
-            std::cout << "Liste des ressources :" << std::endl << coursrecup.afficherListeRessource() << std::endl;
-            break;
+            if (p.containsCours(nomCours)) {
+                Cours& coursrecup = p.getCoursParNom(nomCours);
+                std::cout << "Liste des ressources :" << std::endl << coursrecup.afficherListeRessource() << std::endl;
+            }else
+                std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
+                break;
         }
 
         default:

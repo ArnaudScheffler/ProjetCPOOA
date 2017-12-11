@@ -27,7 +27,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Master/Cours.cpp \
     Master/gui.cpp \
-    Master/mainwindow.cpp
+    Master/mainwindow.cpp \
+    Master/console.cpp
 
 HEADERS += \
     Master/Cours.hpp \
@@ -35,7 +36,8 @@ HEADERS += \
     Master/Etudiant.hpp \
     Master/Plateforme.hpp \
     Master/rang.hpp \
-    Master/mainwindow.h
+    Master/mainwindow.h \
+    Master/Ressource.hpp
 
 FORMS += \
     Master/mainwindow.ui
