@@ -3,7 +3,7 @@
 #
 
 # répertoires (console seul, gui, tous)
-CNSL_REP = 1 2a 2b 3
+CNSL_REP = 1 2a 2b 3 4
 GUI_REP  = 
 ALL_REP  = $(CNSL_REP) $(GUI_REP)
 
