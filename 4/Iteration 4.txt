@@ -1,0 +1,2 @@
+﻿Par rapport a l'iteration 3, on a implémenté la classe Ressource et les méthodes associées dans la console pour tester.
+Le diagramme de classe est mis a jour.

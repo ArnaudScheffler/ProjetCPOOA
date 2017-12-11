@@ -1,3 +1,3 @@
-﻿Par rapport a l'iteration 2, On a implémenté la classe Admin qui hérite de Enseignant (héritant elle même de Etudiant) ainsi que ses tests dans notre menu console. La gestion de la file principale et d'attente ont été ajouté aux Cours. Un administrateur peut désormais changer l'état d'un cours en changeant un booléen. 
+﻿Par rapport a l'iteration 2, on a implémenté la classe Admin qui hérite de Enseignant (héritant elle même de Etudiant) ainsi que ses tests dans notre menu console. La gestion de la file principale et d'attente ont été ajouté aux Cours. Un administrateur peut désormais changer l'état d'un cours en changeant un booléen. 
 Le diagramme de classe est mis a jour.
 (On a aussi ajouté des couleurs, et c'est cross-platform même wouinwouin)
