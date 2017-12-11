@@ -141,9 +141,16 @@ public:
 		}
 	}
 
+    /**
+     * @brief addRessource
+     * @param r Ressource a ajouter au cours
+     */
 	void addRessource(Ressource& r) { mapRessource.insert(std::make_pair(r.getPath(), &r)); }
 	
-	
+    /**
+     * @brief removeRessource
+     * @param r La ressource a supprimer
+     */
 	void removeRessource(std::string r){
 		std::map<std::string, Ressource*>::iterator it;
 		it=mapRessource.find(r);
@@ -192,7 +199,11 @@ public:
 	std::string afficherListeA();
 	
 	
-	
+    /**
+     * @brief afficherListeRessource
+     * @return La liste des ressource pour ce cours
+     * @version 4
+     */
 	
 	std::string afficherListeRessource();
 };
