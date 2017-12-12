@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QStringListModel>
 
 #include "Plateforme.hpp"
 
@@ -22,12 +23,20 @@ public:
 private:
     Ui::MainWindow *ui;
     Plateforme *plateforme;
+    Cours *coursSelectionne;
+
+    QStringListModel listeModelCours;
+    QStringListModel listeModelCoursSuivis;
+    QStringListModel listeModelEdutiantsPrincipal;
+    QStringListModel listeModelEdutiantsSecondaire;
 
 public slots:
     void seConnecter();
 private slots:
     void on_Precedent_clicked();
     void on_actionexit_triggered();
+    void on_pushButtonAccueil_clicked();
+    void on_listCoursSuivis_doubleClicked(const QModelIndex &index);
 };
 
 #endif // MAINWINDOW_H

@@ -95,6 +95,12 @@ public:
 	 */
 	bool getStatus() { return validation ;}
 
+    /**
+     * @brief Retourne le nombre de place en liste principale
+     * @return int nb place en liste principale
+     */
+    int getNbPlace() { return nbPlace; }
+
 	/**
 	 * @brief Supprime un etudiant a la liste principale/attente
 	 * @param etu Etudiant devant etre ajouter a la liste

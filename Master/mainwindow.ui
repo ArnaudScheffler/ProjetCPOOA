@@ -17,11 +17,11 @@
    <double>1.000000000000000</double>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Connection">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -249,6 +249,86 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="Cours">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Liste des ressources :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="listRessources"/>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Liste des étudiants</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="listPrincipaleEtudiant"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelNombrePlace">
+            <property name="text">
+             <string>Nombre de place :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Liste d'attente</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="listAttenteEtudiant"/>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="pushButtonAccueil">
+            <property name="text">
+             <string>Accueil</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="labelNomCours">
+          <property name="text">
+           <string>Cours :</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -259,7 +339,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">

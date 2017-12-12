@@ -14,7 +14,9 @@ int main(int argc, char **argv)
     Plateforme p;
 
     Cours *cpooa = new Cours("CPOOA", "","","",10);
+    cpooa->setValidation(true);
     Cours *algo = new Cours("Algo", "", "", "", 13);
+    algo->setValidation(true);
     p.addCours(*cpooa);
     p.addCours(*algo);
 
