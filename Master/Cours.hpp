@@ -131,6 +131,20 @@ public:
 	 */
 	std::list<Etudiant*> getListeEtudiantA() { return listeEtudiantA; }
 
+    /**
+     * @brief Renvoie la liste des ressources du cours
+     * @return std::list<Ressource*>
+     * @version 5
+     *
+     */
+    std::list<Ressource*> getRessources() {
+        std::list<Ressource*> res;
+        for(auto it = mapRessource.cbegin(); it != mapRessource.cend();it++){
+            res.push_back((it->second));
+        }
+        return res;
+    }
+
 	/**
 	 * @brief Ajoute un etudiant a la liste principale/attente
 	 * @param etu Etudiant devant etre ajouter a la liste

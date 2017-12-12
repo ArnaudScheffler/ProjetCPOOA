@@ -17,6 +17,8 @@ int main(int argc, char **argv)
     cpooa->setValidation(true);
     Cours *algo = new Cours("Algo", "", "", "", 13);
     algo->setValidation(true);
+    Ressource *res = new Ressource("pdf", "./test.pdf");
+    algo->addRessource(*res);
     p.addCours(*cpooa);
     p.addCours(*algo);
 

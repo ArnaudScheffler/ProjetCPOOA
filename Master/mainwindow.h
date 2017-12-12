@@ -27,8 +27,9 @@ private:
 
     QStringListModel listeModelCours;
     QStringListModel listeModelCoursSuivis;
-    QStringListModel listeModelEdutiantsPrincipal;
-    QStringListModel listeModelEdutiantsSecondaire;
+    QStringListModel listeModelEtudiantsPrincipal;
+    QStringListModel listeModelEtudiantsSecondaire;
+    QStringListModel listeModelRessources;
 
 public slots:
     void seConnecter();

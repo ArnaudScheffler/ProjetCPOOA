@@ -261,7 +261,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listRessources"/>
+           <widget class="QListView" name="listRessources">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -275,7 +279,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listPrincipaleEtudiant"/>
+           <widget class="QListView" name="listPrincipaleEtudiant">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="labelNombrePlace">
@@ -292,7 +300,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listAttenteEtudiant"/>
+           <widget class="QListView" name="listAttenteEtudiant">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -339,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -372,8 +384,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>82</y>
+     <x>123</x>
+     <y>74</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -388,8 +400,8 @@
    <slot>seConnecter()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>82</y>
+     <x>123</x>
+     <y>74</y>
     </hint>
     <hint type="destinationlabel">
      <x>511</x>
@@ -420,12 +432,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>82</y>
+     <x>123</x>
+     <y>74</y>
     </hint>
     <hint type="destinationlabel">
-     <x>133</x>
-     <y>82</y>
+     <x>123</x>
+     <y>74</y>
     </hint>
    </hints>
   </connection>

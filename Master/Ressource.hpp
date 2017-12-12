@@ -25,6 +25,16 @@ public:
      */
     std::string getPath(){ return path; }
 
+    /**
+     * @brief Redefinition de l'operateur == pour pouvoir l'utiliser sur des ressources,
+     * par exemple
+     * @return bool
+     * @version 5
+     */
+    bool operator==( const Ressource& test ) const {
+        return this->path == test.path;
+    }
+
 };
 
 #endif // RESSOURCE_H
