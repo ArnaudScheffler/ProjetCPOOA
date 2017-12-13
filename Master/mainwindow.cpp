@@ -76,7 +76,7 @@ void MainWindow::on_pushButtonAccueil_clicked()
 void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
 {
     // On récupère le nom du cours en fonction de l'index
-    QString nomCours = listeModelCoursSuivis.data(index).toString();
+    QString nomCours = listeModelCoursSuivis.data(index,0).toString();
     coursSelectionne = &plateforme->getCoursParNom(nomCours.toStdString());
 
     // Donne le nom du cours au label
@@ -86,27 +86,27 @@ void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
     // Affiche la liste des ressources
     std::list<Ressource*> listeRessource = coursSelectionne->getRessources();
     QStringList QStringlistRessources;
-    for (auto it=listeRessource.cbegin(); it!=listeRessource.cend(); it++ ){
-        QStringlistRessources << QString::fromStdString( (*it)->getPath() );
-    }
+        for (auto it=listeRessource.cbegin(); it!=listeRessource.cend(); it++ ){
+            QStringlistRessources << QString::fromStdString( (*it)->getPath() );
+        }
     listeModelRessources.setStringList(QStringlistRessources);
     ui->listRessources->setModel(&listeModelRessources);
 
     // Affiche la liste principale des étudiants
     std::list<Etudiant*> listeEtudiantP = coursSelectionne->getListeEtudiantP();
     QStringList QStringlistEtudiantP;
-    for (auto it=listeEtudiantP.cbegin(); it!=listeEtudiantP.cend(); it++ ){
-        QStringlistEtudiantP << QString::fromStdString( (*it)->getLogin() );
-    }
+        for (auto it=listeEtudiantP.cbegin(); it!=listeEtudiantP.cend(); it++ ){
+            QStringlistEtudiantP << QString::fromStdString( (*it)->getLogin() );
+        }
     listeModelEtudiantsPrincipal.setStringList(QStringlistEtudiantP);
     ui->listPrincipaleEtudiant->setModel(&listeModelEtudiantsPrincipal);
 
     // Affiche la liste d'attente des étudiants
     std::list<Etudiant*> listeEtudiantA = coursSelectionne->getListeEtudiantA();
     QStringList QStringlistEtudiantA;
-    for (auto it=listeEtudiantA.cbegin(); it!=listeEtudiantA.cend(); it++ ){
-        QStringlistEtudiantA << QString::fromStdString( (*it)->getLogin() );
-    }
+        for (auto it=listeEtudiantA.cbegin(); it!=listeEtudiantA.cend(); it++ ){
+            QStringlistEtudiantA << QString::fromStdString( (*it)->getLogin() );
+        }
     listeModelEtudiantsSecondaire.setStringList(QStringlistEtudiantA);
     ui->listAttenteEtudiant->setModel(&listeModelEtudiantsSecondaire);
 

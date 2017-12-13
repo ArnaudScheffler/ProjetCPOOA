@@ -29,6 +29,7 @@ int main(int argc, char **argv)
     etudef->inscrire( *algo );
     p.addEtudiant(*etudef);
     etudef = new Etudiant("b", "pass");
+    etudef->inscrire( *algo );
     p.addEtudiant(*etudef);
     etudef = new Etudiant("this4u", "pass");
     p.addEtudiant(*etudef);
