@@ -5,4 +5,3 @@ To Do :
 - Factoriser le code dans plateforme
 - Passer Plateforme en .cpp
 - Placer les fichiers dans des dossiers
-- Double click sur un cours pour ouvrir la vue du cours

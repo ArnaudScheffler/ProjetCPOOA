@@ -40,12 +40,28 @@ private slots:
     void seConnecter();
 
     /**
-     * @brief on_Precedent_clicked
+     * @brief on_buttonDeconnection_clicked Permet de se déconnecter et d'afficher la page d'inscription
      */
-    void on_Precedent_clicked();
+    void on_buttonDeconnexion_clicked();
+
+    /**
+     * @brief on_actionexit_triggered Quitte l'application dans le menu Fichier -> Quitter
+     */
     void on_actionexit_triggered();
+
+    /**
+     * @brief on_pushButtonAccueil_clicked Retourne à la page d'accueil d'un utilisateur quand on est sur la
+     * page d'un cours
+     */
     void on_pushButtonAccueil_clicked();
+
+    /**
+     * @brief on_listCoursSuivis_doubleClicked Affiche la vue d'un cours avec ses informations quand on
+     * le séléctionne dans la liste de cours suivis
+     * @param index duc cours séléctionné dans la liste
+     */
     void on_listCoursSuivis_doubleClicked(const QModelIndex &index);
+
 };
 
 #endif // MAINWINDOW_H

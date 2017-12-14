@@ -58,7 +58,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_Precedent_clicked()
+void MainWindow::on_buttonDeconnexion_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
@@ -117,3 +117,5 @@ void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
     // Affiche la bonne page
     ui->stackedWidget->setCurrentIndex(2);
 }
+
+

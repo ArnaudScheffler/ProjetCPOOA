@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Connection">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -131,12 +131,12 @@
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPushButton" name="Precedent">
+             <widget class="QPushButton" name="buttonDeconnexion">
               <property name="autoFillBackground">
                <bool>false</bool>
               </property>
               <property name="text">
-               <string>Précédent</string>
+               <string>Déconnexion</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -351,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">

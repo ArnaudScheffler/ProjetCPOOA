@@ -25,18 +25,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Master/Cours.cpp \
-    Master/gui.cpp \
-    Master/mainwindow.cpp
+    Cours.cpp \
+    gui.cpp \
+    mainwindow.cpp \
 
 HEADERS += \
-    Master/Cours.hpp \
-    Master/Enseignant.hpp \
-    Master/Etudiant.hpp \
-    Master/Plateforme.hpp \
-    Master/rang.hpp \
-    Master/mainwindow.h \
-    Master/Ressource.hpp
+    Cours.hpp \
+    Enseignant.hpp \
+    Etudiant.hpp \
+    Plateforme.hpp \
+    rang.hpp \
+    mainwindow.h \
+    Ressource.hpp \
 
 FORMS += \
-    Master/mainwindow.ui
+    mainwindow.ui
