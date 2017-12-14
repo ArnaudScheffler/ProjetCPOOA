@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Connection">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -339,6 +339,13 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="SeDesinscrire">
+          <property name="text">
+           <string>Se desinscrire</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -384,8 +391,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>360</x>
-     <y>347</y>
+     <x>123</x>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -400,8 +407,8 @@
    <slot>seConnecter()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>481</x>
-     <y>347</y>
+     <x>123</x>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel">
      <x>511</x>
@@ -432,12 +439,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>481</x>
-     <y>314</y>
+     <x>123</x>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>481</x>
-     <y>347</y>
+     <x>123</x>
+     <y>78</y>
     </hint>
    </hints>
   </connection>

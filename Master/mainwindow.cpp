@@ -130,9 +130,6 @@ void MainWindow::on_listCours_doubleClicked(const QModelIndex &index)
     QString nomCours = listeModelCours.data(index,0).toString();
     coursSelectionne = &plateforme->getCoursParNom(nomCours.toStdString());
 
-
-
-
     if(!e.inscrire(*coursSelectionne)){
         QStringList listCoursSuivis;
         for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
@@ -141,4 +138,22 @@ void MainWindow::on_listCours_doubleClicked(const QModelIndex &index)
         listeModelCoursSuivis.setStringList(listCoursSuivis);
         ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
     }
+}
+
+void MainWindow::on_SeDesinscrire_clicked()
+{
+    std::string login = ui->lineLogin->text().toStdString();
+    Etudiant& e = plateforme->getEtudiantParLogin(login);
+
+    e.desinscrire(*coursSelectionne);
+
+
+    QStringList listCoursSuivis;
+    for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
+        listCoursSuivis << QString::fromStdString((*it)->getNom());
+    }
+    listeModelCoursSuivis.setStringList(listCoursSuivis);
+    ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
+
+    ui->stackedWidget->setCurrentIndex(1);
 }

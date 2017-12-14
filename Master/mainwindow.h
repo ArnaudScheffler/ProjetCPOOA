@@ -64,6 +64,7 @@ private slots:
 
 
     void on_listCours_doubleClicked(const QModelIndex &index);
+    void on_SeDesinscrire_clicked();
 };
 
 #endif // MAINWINDOW_H
