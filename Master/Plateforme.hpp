@@ -114,7 +114,7 @@ public:
      * @brief Ajoute un user la plateforme
      * @param role Le type de compte (0: Etudiant, 1: Enseignant, 2: Admin)
 	 * @param e L'etudiant à ajouter à la plateforme
-	 * @version 1
+     * @version 6
 	 *
 	 */
     void addUser(int role,Etudiant& e) {mapUser.insert(std::make_pair(e.getLogin(),std::make_pair(role,&e))); }
@@ -124,45 +124,62 @@ public:
      * @param login le login de l'user
      * @param role le role de l'user
 	 * @return true si l'étudiant existe, false sinon
-	 * @version 3
+     * @version 6
 	 *
 	 */
     bool containsUser(std::string login) {
         return (mapUser.find(login) != mapUser.end()) ;
     }
 
+    /**
+     * @brief Fonction test du role d'un user
+     * @param login le login de l'user
+     * @param role le role de l'user
+     * @return true si l'user a le bon role, false sinon
+     * @version 6
+     *
+     */
+    bool isGranted(std::string login,int role) {
+        return (mapUser.find(login) != mapUser.end() && mapUser.find(login)->second.first == role) ;
+    }
+
+    /**
+     * @brief Renvoie l'Admin à partir de son login
+     * @param login Login de l'user recherche
+     * @return Admin&
+     * @version 6
+     *
+     */
+    Admin& getAdminParLogin(const std::string login) {
+        return *(Admin*)mapUser[login].second;
+    }
+
+    /**
+     * @brief Renvoie l'Enseignant à partir de son login
+     * @param login Login de l'user recherche
+     * @return Enseignant&
+     * @version 6
+     *
+     */
+    Enseignant& getEnseignantParLogin(const std::string login) {
+        return *(Enseignant*)mapUser[login].second;
+    }
+
 	/**
      * @brief Renvoie l'User à partir de son login
      * @param login Login de l'user recherche
 	 * @return Etudiant&
-	 * @version 1
+     * @version 6
 	 *
 	 */
-    Etudiant& getUserParLogin(const std::string login, int role) {
-        switch (role){
-            case 0:{
-                Etudiant& res = *mapUser[login].second;
-                return res;
-            }
-            case 1:{
-                Enseignant& res = (Enseignant&)*mapUser[login].second;
-                return res;
-            }
-            case 2:{
-                Admin& res = (Admin&)*mapUser[login].second;
-                return res;
-            }
-            default:{
-                Etudiant& res = *mapUser[login].second;
-                return res;
-            }
-        }
+    Etudiant& getEtudiantParLogin(const std::string login) {
+        return *mapUser[login].second;
     }
 
 	/**
      * @brief Renvoie un string contenant tous les user de la plateforme qui ont le bon role
 	 * @return std::string
-	 * @version 1
+     * @version 6
 	 *
 	 */
     std::string afficherUser(int role) {
@@ -177,7 +194,7 @@ public:
 
 	/**
 	 * @brief Vide les listes en supprimant correctement tous les éléments
-	 * @version 3
+     * @version 6
 	 */
 	void vider() {
         for(std::map<std::string, std::pair<int,Etudiant*>>::iterator it = mapUser.begin(); it != mapUser.end(); it++) {

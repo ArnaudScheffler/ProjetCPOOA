@@ -28,6 +28,7 @@ SOURCES += \
     Cours.cpp \
     gui.cpp \
     mainwindow.cpp \
+    console.cpp
 
 HEADERS += \
     Cours.hpp \

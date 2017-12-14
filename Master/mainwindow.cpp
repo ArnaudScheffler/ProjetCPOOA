@@ -24,13 +24,13 @@ void MainWindow::seConnecter()
     std::string login = ui->lineLogin->text().toStdString();
     std::string mdp = ui->lineMdp->text().toStdString();
 
-    if (plateforme->containsUser(login) && plateforme->getUserParLogin(login,ROLE_ETUD).verifMDP(mdp) ) {
+    if (plateforme->containsUser(login) && plateforme->getEtudiantParLogin(login).verifMDP(mdp) ) {
         //Passe a la page suivante
         QString home = QString::fromStdString("Bienvenue " + login + " !");
         ui->label_3->setText(home);
 
         // Afficher les cours suivis
-        Etudiant e = plateforme->getUserParLogin(login,ROLE_ETUD);
+        Etudiant e = plateforme->getEtudiantParLogin(login);
         QStringList listCoursSuivis;
         for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
             listCoursSuivis << QString::fromStdString( (*it)->getNom() );

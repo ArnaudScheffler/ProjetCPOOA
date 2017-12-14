@@ -165,27 +165,25 @@ int main() {
             coutest = new Cours(nom, datedeb,datefin,datefininsc,nbplace);
             std::cout << "Liste des Enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containUser(nomEnseignant)) {
-                Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
+            if (p.containsUser(nomEnseignant)) {
+                Enseignant& ensrecup = p.getEnseignantParLogin(nomEnseignant);
                 ensrecup.proposerUnCours(*coutest);
                 p.addCours(*coutest);
                 std::cout GREEN << "Votre Cours : \nNom : " << coutest->getNom() <<"\nEnseingant auteur : " << coutest->getLoginEnseignant() << "\nA été ajouté a la plate-forme." << RESET std::endl;
             } else
                 std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
-
             break;
         }
         case 4:{
             std::string nomEnseignant = "";
             std::string nomCours = "";
-
             std::cout << "Liste des Enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containUser(nomEnseignant)) {
+            if (p.containsUser(nomEnseignant)) {
                 std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
                 std::cin >> nomCours;
                 if (p.containsCours(nomCours)) {
-                    Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
+                    Enseignant& ensrecup = p.getEnseignantParLogin(nomEnseignant);
                     Cours& coursrecup = p.getCoursParNom(nomCours);
                     ensrecup.proposerUnCours(coursrecup);
                     std::cout << "Resultat :" << std::endl << ensrecup.getLogin()<< " à desormais les cours :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
@@ -193,17 +191,14 @@ int main() {
                     std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
                 std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
-
-
             break;
         }
         case 5:{
             std::string nomEtudiant = "";
             std::string nomCours = "";
-
             std::cout << "Liste des Etudiant :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : ";
             std::cin >> nomEtudiant;
-            if (p.containsEtudiant(nomEtudiant)) {
+            if (p.containsUser(nomEtudiant)) {
                 std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
                 std::cin >> nomCours;
                 if (p.containsCours(nomCours)) {
@@ -218,22 +213,18 @@ int main() {
                     std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
                 std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
-
-
             break;
         }
         case 6:{
             std::string nomCours = "";
             std::string nomEtudiant = "";
-
             std::cout << "Liste des Etudiant :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : ";
             std::cin >> nomEtudiant;
-            if (p.containsEtudiant(nomEtudiant)) {
+            if (p.containsUser(nomEtudiant)) {
                 Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
                 std::cout << "Liste des cours de l'étudiant :" << std::endl << eturecup.afficherCours() << "Nom du cours : ";
                 std::cin >> nomCours;
                 if (p.containsCours(nomCours)) {
-                    Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
                     Cours& coursrecup = p.getCoursParNom(nomCours);
                     eturecup.desinscrire(coursrecup);
                     std::cout << "Resultat :" << std::endl << eturecup.getLogin()<< " à desormais les cours :" << std::endl <<eturecup.afficherCours() << std::endl;
@@ -241,35 +232,29 @@ int main() {
                     std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
                 std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
-
-
             break;
         }
         case 7:{
             std::string nomEnseignant = "";
             std::cout << "Liste des enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-
-            if (p.containUser(nomEnseignant)) {
-                Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
+            if (p.containsUser(nomEnseignant)) {
+                Enseignant& ensrecup = p.getEnseignantParLogin(nomEnseignant);
                 std::cout << "Cours proposé par l'enseignant " << ensrecup.getLogin() << " :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
             } else
                 std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
-
-
             break;
         }
         case 8:{
             std::string nomEtudiant = "";
             std::cout << "Liste des étudiants :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : " ;
             std::cin >> nomEtudiant;
-            if (!p.containsEtudiant(nomEtudiant))
+            if (!p.containsUser(nomEtudiant))
                 std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
             else {
                 Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
                 std::cout << "Cours de l'etudiant :" << std::endl << eturecup.getLogin()<< " a les cours :" << std::endl <<eturecup.afficherCours() << std::endl;
             }
-
             break;
         }
 
@@ -310,7 +295,7 @@ int main() {
             std::cout << "Entrez le mot de passe de l'Admin : ";
             std::cin >> mdp;
             adtest = new Admin(login, mdp);
-            p.addAdmin(*adtest);
+			p.addUser(ROLE_ADMIN,*adtest);
             std::cout << "Votre admin : \nLogin : " << adtest->getLogin() <<"\nMDP : " << adtest->getMDP() << "\nA été ajouté a la plate-forme." << std::endl;
             //delete adtest;
             break;
@@ -320,8 +305,8 @@ int main() {
             std::string nomCours = "";
             std::cout << "Liste des admins :\n" << p.afficherUser(ROLE_ADMIN) << "Login : ";
             std::cin >> nomAdmin;
-            if (p.containsAdmin(nomAdmin)) {
-                Admin& adrecup = p.getAdminparLogin(nomAdmin);
+            if (p.containsUser(nomAdmin)) {
+                Admin& adrecup = p.getAdminParLogin(nomAdmin);
                 std::cout << "Liste des cours invalides :" << std::endl << p.afficherCoursInvalide() << "Nom du cours : ";
                 std::cin >> nomCours;
                 if (p.containsCours(nomCours)) {
