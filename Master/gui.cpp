@@ -29,19 +29,21 @@ int main(int argc, char **argv)
     p.addCours(*cpooa);
     p.addCours(*algo);
 
+    Enseignant* endef = new Enseignant("Arnaud", "pass");
+    p.addUser(ROLE_ENSEIGN,*endef);
     Etudiant* etudef = new Etudiant("el", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("a", "pass");
     etudef->inscrire( *cpooa );
     etudef->inscrire( *algo );
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("b", "pass");
     etudef->inscrire( *algo );
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("this4u", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("jo", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
 
 
 

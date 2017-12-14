@@ -10,7 +10,7 @@
 #include <limits>
 #include <stdlib.h>
 #include <stdio.h>
-#include "rang.hpp"
+//#include "rang.hpp"
 #include "Cours.hpp"
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
@@ -21,10 +21,10 @@
 //#define EFFACER "\ec"
 //define EFFACER "\033c"
 #define EFFACER ""
-#define GREEN <<rang::fg::green
-#define RED <<rang::fg::red
-#define BLUE <<rang::fg::cyan
-#define RESET rang::style::reset<<
+#define GREEN //<<rang::fg::green
+#define RED //<<rang::fg::red
+#define BLUE //<<rang::fg::cyan
+#define RESET //rang::style::reset<<
 
 /**
  *\fn void pause()
@@ -52,21 +52,21 @@ void remplir(Plateforme& p){
 
     Enseignant* endef = new Enseignant("ga", "pass");
     endef->proposerUnCours(*cdef);
-    p.addEnseignant(*endef);
+    p.addUser(ROLE_ENSEIGN,*endef);
 
     Etudiant* etudef = new Etudiant("el", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("a", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("b", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("this4u", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("jo", "pass");
-    p.addEtudiant(*etudef);
+    p.addUser(ROLE_ETUD,*etudef);
 
     Admin* adm = new Admin("admin","pass");
-    p.addAdmin(*adm);
+    p.addUser(ROLE_ADMIN,*adm);
 }
 
 /**
@@ -101,7 +101,7 @@ int main() {
                   BLUE << "[13]" << RESET "- Liste des admins de la plate-forme" << std::endl
                   BLUE << "[14]" << RESET "- Créer un Admin" << std::endl
                   BLUE << "[15]" << RESET "- Valider un cours" << std::endl
-		  BLUE << "[16]" << RESET "- Ajouter une ressource a un cours" << std::endl
+				  BLUE << "[16]" << RESET "- Ajouter une ressource a un cours" << std::endl
                   BLUE << "[17]" << RESET "- Supprimer une ressource d'un cours" << std::endl
                   BLUE << "[18]" << RESET "- Afficher les ressources d'un cours" << std::endl;
 
@@ -125,7 +125,7 @@ int main() {
             std::cout << "Entrez le mot de passe de l'Enseignant : ";
             std::cin >> mdp;
             entest = new Enseignant(login, mdp);
-            p.addEnseignant(*entest);
+            p.addUser(ROLE_ENSEIGN,*entest);
             std::cout GREEN << "Votre enseignant : \nLogin : " << entest->getLogin() <<"\nMDP : " << entest->getMDP() << "\nA été ajouté a la plate-forme." << RESET std::endl;
 
             break;
@@ -139,7 +139,7 @@ int main() {
             std::cout << "Entrez le mot de passe de l'Etudiant : ";
             std::cin >> mdp;
             etutest = new Etudiant(login, mdp);
-            p.addEtudiant(*etutest);
+			p.addUser(ROLE_ADMIN,*etutest);
             std::cout GREEN << "Votre etudiant : \nLogin : " << etutest->getLogin() <<"\nMDP : " << etutest->getMDP() << "\nA été ajouté a la plate-forme." << RESET std::endl;
 
             break;
@@ -163,9 +163,9 @@ int main() {
             std::cout << "Entrez le nombre de place pour ce Cours." << std::endl;
             std::cin >> nbplace;
             coutest = new Cours(nom, datedeb,datefin,datefininsc,nbplace);
-            std::cout << "Liste des Enseignants :" << std::endl << p.afficherEnseignant() << "Login : ";
+            std::cout << "Liste des Enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containsEnseignant(nomEnseignant)) {
+            if (p.containUser(nomEnseignant)) {
                 Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
                 ensrecup.proposerUnCours(*coutest);
                 p.addCours(*coutest);
@@ -179,9 +179,9 @@ int main() {
             std::string nomEnseignant = "";
             std::string nomCours = "";
 
-            std::cout << "Liste des Enseignants :" << std::endl << p.afficherEnseignant() << "Login : ";
+            std::cout << "Liste des Enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containsEnseignant(nomCours)) {
+            if (p.containUser(nomEnseignant)) {
                 std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
                 std::cin >> nomCours;
                 if (p.containsCours(nomCours)) {
@@ -201,7 +201,7 @@ int main() {
             std::string nomEtudiant = "";
             std::string nomCours = "";
 
-            std::cout << "Liste des Etudiant :" << std::endl << p.afficherEtudiant() << "Login : ";
+            std::cout << "Liste des Etudiant :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : ";
             std::cin >> nomEtudiant;
             if (p.containsEtudiant(nomEtudiant)) {
                 std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
@@ -226,7 +226,7 @@ int main() {
             std::string nomCours = "";
             std::string nomEtudiant = "";
 
-            std::cout << "Liste des Etudiant :" << std::endl << p.afficherEtudiant() << "Login : ";
+            std::cout << "Liste des Etudiant :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : ";
             std::cin >> nomEtudiant;
             if (p.containsEtudiant(nomEtudiant)) {
                 Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
@@ -247,10 +247,10 @@ int main() {
         }
         case 7:{
             std::string nomEnseignant = "";
-            std::cout << "Liste des enseignants :" << std::endl << p.afficherEnseignant() << "Login : ";
+            std::cout << "Liste des enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
 
-            if (p.containsEnseignant(nomEnseignant)) {
+            if (p.containUser(nomEnseignant)) {
                 Enseignant& ensrecup = p.getEnseignantparLogin(nomEnseignant);
                 std::cout << "Cours proposé par l'enseignant " << ensrecup.getLogin() << " :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
             } else
@@ -261,7 +261,7 @@ int main() {
         }
         case 8:{
             std::string nomEtudiant = "";
-            std::cout << "Liste des étudiants :" << std::endl << p.afficherEtudiant() << "Login : " ;
+            std::cout << "Liste des étudiants :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : " ;
             std::cin >> nomEtudiant;
             if (!p.containsEtudiant(nomEtudiant))
                 std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
@@ -274,11 +274,11 @@ int main() {
         }
 
         case 9:
-            std::cout << "Liste des étudiants :" << std::endl << p.afficherEtudiant() << std::endl;
+            std::cout << "Liste des étudiants :" << std::endl << p.afficherUser(ROLE_ETUD) << std::endl;
             break;
 
         case 10:
-            std::cout << "Liste des enseignants :" << std::endl << p.afficherEnseignant() << std::endl;
+            std::cout << "Liste des enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << std::endl;
             break;
 
         case 11:
@@ -297,7 +297,7 @@ int main() {
         }
 
         case 13:{
-            std::cout << "Liste des admins de la plate-forme :\n" << p.afficherAdmin() << std::endl;
+            std::cout << "Liste des admins de la plate-forme :\n" << p.afficherUser(ROLE_ADMIN) << std::endl;
             break;
         }
 
@@ -318,7 +318,7 @@ int main() {
         case 15:{
             std::string nomAdmin = "";
             std::string nomCours = "";
-            std::cout << "Liste des admins :\n" << p.afficherAdmin() << "Login : ";
+            std::cout << "Liste des admins :\n" << p.afficherUser(ROLE_ADMIN) << "Login : ";
             std::cin >> nomAdmin;
             if (p.containsAdmin(nomAdmin)) {
                 Admin& adrecup = p.getAdminparLogin(nomAdmin);

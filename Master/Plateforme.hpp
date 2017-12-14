@@ -17,6 +17,10 @@
 #include "Enseignant.hpp"
 #include "Admin.hpp"
 
+#define ROLE_ADMIN 2
+#define ROLE_ENSEIGN 1
+#define ROLE_ETUD 0
+
 /**
  * @class Plateforme
  *
@@ -25,9 +29,7 @@ class Plateforme {
 
 private:
 	std::map<std::string, Cours*> mapCours;
-	std::map<std::string, Etudiant*> mapEtudiant;
-	std::map<std::string, Enseignant*> mapEnseignant;
-	std::map<std::string, Admin*> mapAdmin;
+    std::map<std::string, std::pair<int,Etudiant*>> mapUser;
 
 public:
 
@@ -109,122 +111,67 @@ public:
 	}
 
 	/**
-	 * @brief Ajoute un etudiant la plateforme
+     * @brief Ajoute un user la plateforme
+     * @param role Le type de compte (0: Etudiant, 1: Enseignant, 2: Admin)
 	 * @param e L'etudiant à ajouter à la plateforme
 	 * @version 1
 	 *
 	 */
-	void addEtudiant(Etudiant& e) { mapEtudiant.insert(std::make_pair(e.getLogin(), &e)); }
+    void addUser(int role,Etudiant& e) {mapUser.insert(std::make_pair(e.getLogin(),std::make_pair(role,&e))); }
 
 	/**
-	 * @brief Fonction test existence d'un étudiant
-	 * @param login le login de l'étudiant
+     * @brief Fonction test existence d'un user avec le bon role
+     * @param login le login de l'user
+     * @param role le role de l'user
 	 * @return true si l'étudiant existe, false sinon
 	 * @version 3
 	 *
 	 */
-	bool containsEtudiant(std::string login) { return !(mapEtudiant.find(login) == mapEtudiant.end()); }
+    bool containsUser(std::string login) {
+        return (mapUser.find(login) != mapUser.end()) ;
+    }
 
 	/**
-	 * @brief Renvoie l'etudiant à partir de son login
-	 * @param login Login de l'etudiant recherche
+     * @brief Renvoie l'User à partir de son login
+     * @param login Login de l'user recherche
 	 * @return Etudiant&
 	 * @version 1
 	 *
 	 */
-	Etudiant& getEtudiantParLogin(const std::string login) { return *mapEtudiant[login]; }
+    Etudiant& getUserParLogin(const std::string login, int role) {
+        switch (role){
+            case 0:{
+                Etudiant& res = *mapUser[login].second;
+                return res;
+            }
+            case 1:{
+                Enseignant& res = (Enseignant&)*mapUser[login].second;
+                return res;
+            }
+            case 2:{
+                Admin& res = (Admin&)*mapUser[login].second;
+                return res;
+            }
+            default:{
+                Etudiant& res = *mapUser[login].second;
+                return res;
+            }
+        }
+    }
 
 	/**
-	 * @brief Renvoie un string contenant tous les etudiants de la plateforme
+     * @brief Renvoie un string contenant tous les user de la plateforme qui ont le bon role
 	 * @return std::string
 	 * @version 1
 	 *
 	 */
-	std::string afficherEtudiant() {
+    std::string afficherUser(int role) {
 		std::stringstream stringstream;
-		for(std::map<std::string, Etudiant*>::iterator it = mapEtudiant.begin(); it != mapEtudiant.end(); it++) {
-			stringstream << (*it).second->getLogin() << std::endl;
-		}
-		return stringstream.str();
-	}
-
-	/**
-	 * @brief Permet d'ajouter un enseignant a la liste de la plateforme
-	 * @param e Enseignant a ajouter a la plateforme
-	 * @version 1
-	 *
-	 */
-	void addEnseignant(Enseignant& e) { mapEnseignant.insert(std::make_pair(e.getLogin(), &e)); }
-
-	/**
-	 * @brief Fonction test existence d'un enseigant
-	 * @param login le login de l'enseigant
-	 * @return true si l'enseigant existe, false sinon
-	 * @version 3
-	 *
-	 */
-	bool containsEnseignant(std::string login) { return !(mapEnseignant.find(login) == mapEnseignant.end()); }
-
-	/**
-	 * @brief Renvoie un enseignant a partir de son login
-	 * @param login Login de l'enseignant recherche
-	 * @return Enseignant&
-	 * @version 1
-	 *
-	 */
-	Enseignant& getEnseignantparLogin(const std::string login) { return *mapEnseignant[login]; }
-
-	/**
-	 * @brief Renvoie un string contenant tous les enseignant de la plateforme
-	 * @return std::string
-	 * @version 1
-	 *
-	 */
-	std::string afficherEnseignant() {
-		std::stringstream stringstream;
-		for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
-			stringstream << (*it).second->getLogin() << std::endl;
-		}
-		return stringstream.str();
-	}
-
-
-	/**
-	 * @brief Permet d'ajouter un administrateur à la liste de la plateforme
-	 * @param a administrateur à ajouter à la plateforme
-	 * @version 1
-	 *
-	 */
-	void addAdmin(Admin& a){ mapAdmin.insert(std::make_pair(a.getLogin(), &a)); }
-
-	/**
-	 * @brief containsAdmin
-	 * @param login
-	 * @return true si l'admin existe
-	 * @version 3
-	 */
-	bool containsAdmin(std::string login) { return !(mapAdmin.find(login) == mapAdmin.end()); }
-
-	/**
-	 * @brief Renvoie un Admin a partir de son login
-	 * @param login Login de l'admin recherche
-	 * @return Admin&
-	 * @version 3
-	 *
-	 */
-	Admin& getAdminparLogin(const std::string login) { return *mapAdmin[login]; }
-
-	/**
-	 * @brief Renvoie un string contenant tous les Admin de la plateforme
-	 * @return std::string
-	 * @version 3
-	 *
-	 */
-	std::string afficherAdmin() {
-		std::stringstream stringstream;
-		for(std::map<std::string, Admin*>::iterator it = mapAdmin.begin(); it != mapAdmin.end(); it++) {
-			stringstream << (*it).second->getLogin() << std::endl;
-		}
+        for(std::map<std::string, std::pair<int,Etudiant*>>::iterator it = mapUser.begin(); it != mapUser.end(); it++) {
+           if ((*it).second.first == role){
+                stringstream << (*it).second.second->getLogin() << std::endl;
+           }
+        }
 		return stringstream.str();
 	}
 
@@ -233,16 +180,10 @@ public:
 	 * @version 3
 	 */
 	void vider() {
-		for(std::map<std::string, Admin*>::iterator it = mapAdmin.begin(); it != mapAdmin.end(); it++) {
-			delete it->second;
-		}
-		for(std::map<std::string, Enseignant*>::iterator it = mapEnseignant.begin(); it != mapEnseignant.end(); it++) {
-			delete it->second;
+        for(std::map<std::string, std::pair<int,Etudiant*>>::iterator it = mapUser.begin(); it != mapUser.end(); it++) {
+            delete it->second.second;
 		}
 		for(std::map<std::string, Cours*>::iterator it = mapCours.begin(); it != mapCours.end(); it++) {
-			delete it->second;
-		}
-		for(std::map<std::string, Etudiant*>::iterator it = mapEtudiant.begin(); it != mapEtudiant.end(); it++) {
 			delete it->second;
 		}
 	}
