@@ -62,6 +62,8 @@ private slots:
      */
     void on_listCoursSuivis_doubleClicked(const QModelIndex &index);
 
+
+    void on_listCours_doubleClicked(const QModelIndex &index);
 };
 
 #endif // MAINWINDOW_H

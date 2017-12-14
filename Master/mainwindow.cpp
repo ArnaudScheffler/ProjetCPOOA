@@ -30,10 +30,10 @@ void MainWindow::seConnecter()
         ui->label_3->setText(home);
 
         // Afficher les cours suivis
-        Etudiant e = plateforme->getEtudiantParLogin(login);
+        Etudiant& e = plateforme->getEtudiantParLogin(login);
         QStringList listCoursSuivis;
         for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
-            listCoursSuivis << QString::fromStdString( (*it)->getNom() );
+            listCoursSuivis << QString::fromStdString((*it)->getNom());
         }
         listeModelCoursSuivis.setStringList(listCoursSuivis);
         ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
@@ -119,3 +119,26 @@ void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
 }
 
 
+
+
+void MainWindow::on_listCours_doubleClicked(const QModelIndex &index)
+{
+    std::string login = ui->lineLogin->text().toStdString();
+    Etudiant& e = plateforme->getEtudiantParLogin(login);
+
+
+    QString nomCours = listeModelCours.data(index,0).toString();
+    coursSelectionne = &plateforme->getCoursParNom(nomCours.toStdString());
+
+
+
+
+    if(!e.inscrire(*coursSelectionne)){
+        QStringList listCoursSuivis;
+        for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
+            listCoursSuivis << QString::fromStdString((*it)->getNom());
+        }
+        listeModelCoursSuivis.setStringList(listCoursSuivis);
+        ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
+    }
+}

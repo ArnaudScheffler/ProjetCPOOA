@@ -128,7 +128,7 @@
        <layout class="QGridLayout" name="gridLayout">
         <item row="1" column="0">
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="0">
+          <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
              <widget class="QPushButton" name="buttonDeconnexion">
@@ -351,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -384,8 +384,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>74</y>
+     <x>360</x>
+     <y>347</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -400,8 +400,8 @@
    <slot>seConnecter()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>74</y>
+     <x>481</x>
+     <y>347</y>
     </hint>
     <hint type="destinationlabel">
      <x>511</x>
@@ -432,12 +432,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>74</y>
+     <x>481</x>
+     <y>314</y>
     </hint>
     <hint type="destinationlabel">
-     <x>123</x>
-     <y>74</y>
+     <x>481</x>
+     <y>347</y>
     </hint>
    </hints>
   </connection>
