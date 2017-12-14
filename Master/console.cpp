@@ -139,7 +139,7 @@ int main2() {
             std::cout << "Entrez le mot de passe de l'Etudiant : ";
             std::cin >> mdp;
             etutest = new Etudiant(login, mdp);
-			p.addUser(ROLE_ADMIN,*etutest);
+            p.addUser(ROLE_ETUD,*etutest);
             std::cout GREEN << "Votre etudiant : \nLogin : " << etutest->getLogin() <<"\nMDP : " << etutest->getMDP() << "\nA été ajouté a la plate-forme." << RESET std::endl;
 
             break;
@@ -165,13 +165,13 @@ int main2() {
             coutest = new Cours(nom, datedeb,datefin,datefininsc,nbplace);
             std::cout << "Liste des Enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containsUser(nomEnseignant)) {
+            if (p.containsUser(nomEnseignant) && p.isGranted(nomEnseignant,ROLE_ENSEIGN)) {
                 Enseignant& ensrecup = p.getEnseignantParLogin(nomEnseignant);
                 ensrecup.proposerUnCours(*coutest);
                 p.addCours(*coutest);
                 std::cout GREEN << "Votre Cours : \nNom : " << coutest->getNom() <<"\nEnseingant auteur : " << coutest->getLoginEnseignant() << "\nA été ajouté a la plate-forme." << RESET std::endl;
             } else
-                std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
+                std::cout RED << "L'enseignant n'existe pas ou n'as pas les bon droits !" << RESET std::endl;
             break;
         }
         case 4:{
@@ -179,7 +179,7 @@ int main2() {
             std::string nomCours = "";
             std::cout << "Liste des Enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containsUser(nomEnseignant)) {
+            if (p.containsUser(nomEnseignant) && p.isGranted(nomEnseignant,ROLE_ENSEIGN)) {
                 std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
                 std::cin >> nomCours;
                 if (p.containsCours(nomCours)) {
@@ -188,9 +188,9 @@ int main2() {
                     ensrecup.proposerUnCours(coursrecup);
                     std::cout << "Resultat :" << std::endl << ensrecup.getLogin()<< " à desormais les cours :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
                 } else
-                    std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
+                    std::cout RED << "Le cours n'existe pas  !" << RESET std::endl;
             } else
-                std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
+                std::cout RED << "L'enseignant n'existe pas ou n'as pas les bon droits !" << RESET std::endl;
             break;
         }
         case 5:{
@@ -198,21 +198,14 @@ int main2() {
             std::string nomCours = "";
             std::cout << "Liste des Etudiant :" << std::endl << p.afficherUser(ROLE_ETUD) << "Login : ";
             std::cin >> nomEtudiant;
-            if (p.containsUser(nomEtudiant)) {
-                std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
-                std::cin >> nomCours;
-                if (p.containsCours(nomCours)) {
-                    Etudiant& eturecup = p.getEtudiantParLogin(nomEtudiant);
-                    Cours& coursrecup = p.getCoursParNom(nomCours);
-                    if (coursrecup.getStatus()){
-                        eturecup.inscrire(coursrecup);
-                        std::cout << "Resultat :" << std::endl << eturecup.getLogin()<< " à desormais les cours :" << std::endl << eturecup.afficherCours() << std::endl;
-                    } else
-                        std::cout << "Le cours n'est pas encore validé !" << std::endl;
-                } else
-                    std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
-            } else
-                std::cout RED << "L'étudiant n'existe pas !" << RESET std::endl;
+            std::cout << "Liste des cours :" << std::endl << p.afficherCours() << "Nom du cours : ";
+            std::cin >> nomCours;
+            if (!p.inscrireEtudiantCours(nomEtudiant,nomCours)){
+                std::cout << "Resultat :" << std::endl << nomEtudiant << " à desormais le cours :" << nomCours << std::endl;
+            } else if(-2)
+                    std::cout << "Le cours n'est pas encore validé !" << std::endl;
+              else if(-1)
+                    std::cout RED << "Le cours ou l'étudiant n'existe pas !" << RESET std::endl;
             break;
         }
         case 6:{
@@ -238,11 +231,11 @@ int main2() {
             std::string nomEnseignant = "";
             std::cout << "Liste des enseignants :" << std::endl << p.afficherUser(ROLE_ENSEIGN) << "Login : ";
             std::cin >> nomEnseignant;
-            if (p.containsUser(nomEnseignant)) {
+            if (p.containsUser(nomEnseignant) && p.isGranted(nomEnseignant,ROLE_ENSEIGN)) {
                 Enseignant& ensrecup = p.getEnseignantParLogin(nomEnseignant);
                 std::cout << "Cours proposé par l'enseignant " << ensrecup.getLogin() << " :" << std::endl << ensrecup.afficherCoursPropose() << std::endl;
             } else
-                std::cout RED << "L'enseignant n'existe pas !" << RESET std::endl;
+                std::cout RED << "L'enseignant n'existe pas ou n'as pas les bons droits !" << RESET std::endl;
             break;
         }
         case 8:{
@@ -305,7 +298,7 @@ int main2() {
             std::string nomCours = "";
             std::cout << "Liste des admins :\n" << p.afficherUser(ROLE_ADMIN) << "Login : ";
             std::cin >> nomAdmin;
-            if (p.containsUser(nomAdmin)) {
+            if (p.containsUser(nomAdmin) && p.isGranted(nomAdmin,ROLE_ADMIN)) {
                 Admin& adrecup = p.getAdminParLogin(nomAdmin);
                 std::cout << "Liste des cours invalides :" << std::endl << p.afficherCoursInvalide() << "Nom du cours : ";
                 std::cin >> nomCours;
@@ -316,7 +309,7 @@ int main2() {
                 } else
                     std::cout RED << "Le cours n'existe pas !" << RESET std::endl;
             } else
-                std::cout << "L'admin n'existe pas !" << std::endl;
+                std::cout << "L'admin n'existe pas ou n'est pas administrateur !" << std::endl;
             break;
         }
 		//Ajouter une ressource a un cours

@@ -1,6 +1,4 @@
 ﻿To Do :
 
 - Faire un adapateur entre la platefrome et les vues
-- Ajouter une méthode ajouterCours(login, nomCours) dans Plateforme
-- Passer Plateforme en .cpp
-- Placer les fichiers dans des dossiers
+- d'autres windows

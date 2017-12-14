@@ -81,6 +81,27 @@ public:
 	 */
 	std::map<std::string, Cours*>::iterator getDernierCours() { return mapCours.end(); }
 
+
+    /**
+     * @brief Inscrit un étudiant à un cours
+     * @param nometud le nom de l'étudiant
+     * @param nomCours nom du cours
+     * @return int -1 si cours/etud absents -2 si cours invalide 0 si succes
+     * @version 6
+     */
+    int inscrireEtudiantCours(std::string nometud, std::string nomCours){
+        bool res = false;
+        if (this->containsUser(nometud) && this->containsCours(nomCours)){
+            Etudiant& etud = this->getEtudiantParLogin(nometud);
+            Cours& cours = this->getCoursParNom(nomCours);
+            if (cours.getStatus()){
+                res = etud.inscrire(cours);
+            }else res = -2;
+        }else res = -1;
+
+        return res;
+    }
+
 	/**
 	 * @brief Renvoie un string contenant tous les cours de la plateforme
 	 * @return std::string
@@ -140,7 +161,7 @@ public:
      *
      */
     bool isGranted(std::string login,int role) {
-        return (mapUser.find(login) != mapUser.end() && mapUser.find(login)->second.first == role) ;
+        return (mapUser.find(login) != mapUser.end() && mapUser.find(login)->second.first >= role) ;
     }
 
     /**
