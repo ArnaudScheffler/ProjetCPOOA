@@ -81,9 +81,9 @@ public:
 	 * @brief Permet a un etudiant de s'inscrire a un cours
 	 * @param c Le cours auquel l'etudiant veut s'inscrire
 	 * @version 1
-	 *
+     * @return return si l'etudiant est déjà inscrit ou non
 	 */
-	void inscrire(Cours& c) {
+    bool inscrire(Cours& c) {
 		bool inscrit = false;
 		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
 			if( ((*it)->getNom()) == c.getNom() ){
@@ -94,6 +94,7 @@ public:
 			c.addEtudiant(*this);
 			listeCours.push_back(&c);
 		}
+        return inscrit;
 	}
 
 	/**

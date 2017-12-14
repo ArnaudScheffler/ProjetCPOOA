@@ -74,7 +74,7 @@ void remplir(Plateforme& p){
  *\brief Affiche la console
  *\return int
  */
-int main() {
+int main2() {
     bool quit = false;
     int choice = -1;
 

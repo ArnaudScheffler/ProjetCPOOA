@@ -10,7 +10,7 @@
  * @param argv
  * @return
  */
-int main2(int argc, char **argv)
+int main(int argc, char **argv)
 {
     //init des composants
     QApplication app(argc, argv);
