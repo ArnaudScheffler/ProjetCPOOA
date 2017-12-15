@@ -1,0 +1,9 @@
+﻿Par rapport a l'itération 5, on a continué l'implémentation de l'interface graphique avec Qt.
+On affiche les différentes informations relatives à un Etudiant et à un Cours.
+Le cas de l'inscription d'un Etudiant à un cours a été ajouté.
+Le cas de l'desinscription d'un Etudiant à un cours a été ajouté.
+On affiche le nombre de places et l'enseignant d'un cours.
+La liste d'attente et principale est mise a jour dynamiquement.
+
+Nous avans par ailleurs ajouté une classe qtadapter (Un DP Adapter) qui fait le lien entre les types propres QT et notre modèle.
+Le diagramme de classe à été modifié.
