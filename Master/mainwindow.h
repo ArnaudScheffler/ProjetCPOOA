@@ -72,7 +72,7 @@ private slots:
      * @brief affiche le cours selectionné par l'user
      * @param nomCours le nom du cours
      */
-    void afficherCours(const QString nomCours);
+    void afficherCours(QString nomCours);
 
     /**
      * @brief connexion connecte un utilisateur et affiche les données dans la vue
@@ -81,8 +81,13 @@ private slots:
      */
     void connexion(std::string login, std::string mdp);
 
+    void majListes();
+
     void on_inscrirecours_clicked();
     void on_validationCours_stateChanged();
+    void on_buttonProposerCoursAccueil_clicked();
+    void on_pushButtonAccueil_2_clicked();
+    void on_pushButtonProposerCours_clicked();
 };
 
 #endif // MAINWINDOW_H

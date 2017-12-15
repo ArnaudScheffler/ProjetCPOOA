@@ -45,6 +45,11 @@ void MainWindow::on_pushButtonAccueil_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+void MainWindow::on_pushButtonAccueil_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
 void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
 {
     // On récupère le nom du cours en fonction de l'index
@@ -101,15 +106,18 @@ void MainWindow::on_pushButtonInscription_clicked()
 
 void MainWindow::on_validationCours_stateChanged()
 {
-    if(ui->validationCours->isChecked()){
+    if(ui->validationCours->isChecked())
         coursSelectionne->setValidation(true);
-    }else{
-        coursSelectionne->setValidation(false);
-    }
+
+    majListes();
 }
 
+void MainWindow::afficherCours(QString nomCours){
 
-void MainWindow::afficherCours(const QString nomCours){
+    // On enlève le " (à valider)" pour retrouver le cours dans la plateforme
+    if (nomCours.contains(" (à valider)"))
+        nomCours.chop(12);
+
     coursSelectionne = &(adapter.getPF().getCoursParNom(nomCours.toStdString()));
 
     //propre aux Admins
@@ -117,8 +125,10 @@ void MainWindow::afficherCours(const QString nomCours){
         ui->validationCours->show();
         if(coursSelectionne->getStatus()){
             ui->validationCours->setChecked(true);
+            ui->validationCours->setEnabled(false);
         }else{
             ui->validationCours->setChecked(false);
+            ui->validationCours->setEnabled(true);
         }
     }else{
         ui->validationCours->hide();
@@ -181,31 +191,66 @@ void MainWindow::connexion(std::string login, std::string mdp)
         QString home = QString::fromStdString("Bienvenue " + login + " !");
         ui->label_3->setText(home);
 
-        // Afficher les cours suivis
-        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
-        ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
-
-        // Affiche la liste des cours validés
-        listeModelCours.setStringList(adapter.ListeCoursValide());
-        ui->listCours->setModel(&listeModelCours);
-
-        // Affiche la liste des cours proposés si l'utilisateur est enseigant
-        if (adapter.getPF().isGranted(login, ROLE_ENSEIGN)) {
-            // Cast l'étudiant en enseigant (car on a vérifé son role)
-            listeModelCoursPropose.setStringList(adapter.ListeCoursPropose( *(Enseignant*)etudiantConnecte ));
-            ui->listViewCoursPropose->setModel(&listeModelCoursPropose);
-            // Affiche le widget liste et le label
-            ui->listViewCoursPropose->setVisible(true);
-            ui->label_CoursPropose->setVisible(true);
-        } else {
-            // Cache le widget liste et le label
-            ui->listViewCoursPropose->setVisible(false);
-            ui->label_CoursPropose->setVisible(false);
-        }
+        // Actualise les listes de cours
+        majListes();
 
         // Passe à la page suivante
         ui->stackedWidget->setCurrentIndex(1);
     } else {
         QMessageBox::critical(this, tr("Erreur"), tr("Login ou mot de passe incorrect"));
     }
+}
+
+void MainWindow::majListes()
+{
+    // Afficher les cours suivis
+    listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
+    ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
+
+    // Affiche la liste des cours validés si non admin et tous sinon
+    if (adapter.getPF().isGranted(etudiantConnecte->getLogin(), ROLE_ADMIN)) {
+        listeModelCours.setStringList(adapter.ListeCoursPourAdmin());
+    }
+    else
+        listeModelCours.setStringList(adapter.ListeCoursValide());
+    ui->listCours->setModel(&listeModelCours);
+
+    // Affiche la liste des cours proposés si l'utilisateur est enseignant
+    if (adapter.getPF().isGranted(etudiantConnecte->getLogin(), ROLE_ENSEIGN)) {
+        // Cast l'étudiant en enseigant (car on a vérifé son role)
+        listeModelCoursPropose.setStringList(adapter.ListeCoursPropose( *(Enseignant*)etudiantConnecte ));
+        ui->listViewCoursPropose->setModel(&listeModelCoursPropose);
+        // Affiche le widget liste et le label
+        ui->listViewCoursPropose->setVisible(true);
+        ui->label_CoursPropose->setVisible(true);
+        ui->buttonProposerCoursAccueil->setVisible(true);
+    } else {
+        // Cache le widget liste, label et bouton pour les cours proposés
+        ui->listViewCoursPropose->setVisible(false);
+        ui->label_CoursPropose->setVisible(false);
+        ui->buttonProposerCoursAccueil->setVisible(false);
+    }
+}
+
+void MainWindow::on_buttonProposerCoursAccueil_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_pushButtonProposerCours_clicked()
+{
+    // Récupération des données du formulaire
+    std::string nomCours = ui->lineEditNomCoursPropose->text().toStdString();
+    std::string date_debut = ui->dateEdit_debut->date().toString().toStdString();
+    std::string date_fin = ui->dateEdit_fin->date().toString().toStdString();
+    std::string date_fin_i = ui->dateEdit_fin_i->date().toString().toStdString();
+    int nbPlace = ui->spinBox_nbEtu->value();
+    Enseignant *e = (Enseignant*)etudiantConnecte;
+
+    // Création du cours
+    adapter.getPF().proposerUnCours(*e, nomCours, date_debut, date_fin, date_fin_i, nbPlace);
+
+    // Affichage de la page
+    majListes();
+    ui->stackedWidget->setCurrentIndex(1);
 }

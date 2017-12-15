@@ -21,6 +21,12 @@ int main(int argc, char **argv)
     MainWindow main(NULL, p);
 
     // Initialise la plateforme avec des données en dur
+
+    // Admin
+    Admin *a = new Admin("admin", "pass");
+    p.addUser(ROLE_ADMIN, *a);
+
+    // Les enseignants
     Enseignant* en2def = new Enseignant("Arnaud", "pass");
     p.addUser(ROLE_ENSEIGN,*en2def);
     Enseignant* endef = new Enseignant("Gautier", "pass");
@@ -30,7 +36,7 @@ int main(int argc, char **argv)
 
     // Ajoute des cours
     Cours *cpooa = new Cours("CPOOA", "","","",10);
-    cpooa->setValidation(true);
+    cpooa->setValidation(false);
     endef->proposerUnCours(*cpooa);
     Cours *algo = new Cours("Algo", "", "", "", 13);
     algo->setValidation(true);

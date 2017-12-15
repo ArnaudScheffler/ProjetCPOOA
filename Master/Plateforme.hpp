@@ -242,6 +242,25 @@ public:
         }
     }
 
+    /**
+     * @brief proposerUnCours
+     * @param nom Le nom du cours
+     * @param date_debut La date de début
+     * @param date_fin La date de fin
+     * @param date_fin_i La date de fin d'inscription
+     * @param nbPlace Le nombre de place du cours
+     * @return bool true si le nouveau cours est crée, false sinon
+     */
+    bool proposerUnCours(Enseignant &e, std::string nom, std::string date_debut, std::string date_fin, std::string date_fin_i, int nbPlace) {
+        if (! containsCours(nom) ) {
+            Cours *c = new Cours(nom, date_debut, date_fin, date_fin_i, nbPlace);
+            e.proposerUnCours(*c);
+            mapCours.insert(std::make_pair(nom, c));
+            return true;
+        } else
+            return false;
+    }
+
 	/**
 	 * @brief Vide les listes en supprimant correctement tous les éléments
      * @version 6

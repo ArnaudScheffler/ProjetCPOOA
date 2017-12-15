@@ -32,11 +32,11 @@ public:
     QStringList ListeCoursValide();
 
     /**
-     * @brief ListeCoursAValider Génère une QStringList avec le nom des cours a valider
-     * @return QStringList avec le nom des cours a valider
+     * @brief ListeCoursAValider Génère une QStringList avec le nom des cours plus ceux à valider
+     * @return QStringList
      * @version 6
      */
-    QStringList ListeCoursAValider();
+    QStringList ListeCoursPourAdmin();
 
     /**
      * @brief ListeCoursSuivis Génère une QStringList contenant la liste des cours suivis d'un étudiant

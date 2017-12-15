@@ -1,4 +1,5 @@
 #include "qtadapter.hpp"
+#include <QDebug>
 
 QtAdapter::QtAdapter(Plateforme &p)
 {
@@ -25,12 +26,13 @@ QStringList QtAdapter::ListeCoursValide()
     return list;
 }
 
-QStringList QtAdapter::ListeCoursAValider()
+QStringList QtAdapter::ListeCoursPourAdmin()
 {
-    QStringList list;
+    QStringList list = ListeCoursValide();
     for (auto it=plateforme->getPremierCours(); it!=plateforme->getDernierCours(); it++ ) {
-        if ( it->second->getStatus() )
-            list << QString::fromStdString( it->first );
+        if ( ! it->second->getStatus() ) {
+            qDebug() << "un cours";
+            list << QString::fromStdString( it->first ) + " (à valider)" ;}
     }
     return list;
 }
