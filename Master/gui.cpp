@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 
     Plateforme p;
 
-    //init des composants de la fenêtre
+    // Initialise les composants de la fenêtre
     MainWindow main(NULL, p);
 
     // Initialise la plateforme avec des données en dure
@@ -25,21 +25,24 @@ int main(int argc, char **argv)
     p.addUser(ROLE_ENSEIGN,*en2def);
     Enseignant* endef = new Enseignant("Gautier", "pass");
     p.addUser(ROLE_ENSEIGN,*endef);
+
+    // Ajoute des cours
     Cours *cpooa = new Cours("CPOOA", "","","",10);
     cpooa->setValidation(true);
-    cpooa->setEnseignant(*endef);
+    endef->proposerUnCours(*cpooa);
     Cours *algo = new Cours("Algo", "", "", "", 13);
     algo->setValidation(true);
-    algo->setEnseignant(*endef);
+    endef->proposerUnCours(*algo);
     Cours *sys = new Cours("Systeme", "", "", "", 1);
     sys->setValidation(true);
-    sys->setEnseignant(*en2def);
+    en2def->proposerUnCours(*sys);
     Ressource *res = new Ressource("pdf", "./test.pdf");
     algo->addRessource(*res);
     p.addCours(*cpooa);
     p.addCours(*algo);
     p.addCours(*sys);
 
+    // Ajoute des etudiants
     Etudiant* etudef = new Etudiant("el", "pass");
     p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("a", "pass");
@@ -54,7 +57,7 @@ int main(int argc, char **argv)
     etudef = new Etudiant("jo", "pass");
     p.addUser(ROLE_ETUD,*etudef);
 
-    //afichage de la fenêtre
+    // Affichage de la fenêtre
     main.show();
     return app.exec();
 }

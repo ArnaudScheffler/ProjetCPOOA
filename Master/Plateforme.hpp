@@ -214,14 +214,32 @@ public:
 	}
 
     /**
-     * @brief renvoie un bool validant ou non la connexion d'un user
-     * @return bool
+     * @brief Renvoie un bool validant ou non la connexion d'un user
+     * @return bool true si la connexion est validée
      * @param login le login
      * @param mdp le mot de passe
      * @version 6
      */
-    bool seConnecter(std::string login, std::string mdp){
+    bool seConnecter(std::string login, std::string mdp) {
         return this->containsUser(login) && getEtudiantParLogin(login).verifMDP(mdp);
+    }
+
+    /**
+     * @brief sInscrire
+     * @param login Le login de l'utilisateur
+     * @param mdp Le mot de passe
+     * @param role le role
+     * @return bool true si la l'inscription est réussie
+     * @version 7
+     */
+    bool sInscrire(std::string login, std::string mdp, int role) {
+        if (containsUser(login))
+            return false;
+        else {
+            Etudiant* e = new Etudiant(login, mdp);
+            addUser(role, *e);
+            return true;
+        }
     }
 
 	/**

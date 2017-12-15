@@ -16,28 +16,12 @@ MainWindow::MainWindow(QWidget *parent, Plateforme &p) :
 
 void MainWindow::seConnecter()
 {
+    // Récupère les données des champs
     std::string login = ui->lineLogin->text().toStdString();
     std::string mdp = ui->lineMdp->text().toStdString();
 
-    if (adapter.getPF().seConnecter(login,mdp)) {
-        //Recupere l'user
-        etudiantConnecte = &(adapter.getPF().getEtudiantParLogin(login));
-        //Passe a la page suivante
-        QString home = QString::fromStdString("Bienvenue " + login + " !");
-        ui->label_3->setText(home);
-
-        // Afficher les cours suivis
-        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
-        ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
-
-        // Affiche la liste des cours validés
-        listeModelCours.setStringList(adapter.ListeCoursValide());
-        ui->listCours->setModel(&listeModelCours);
-
-        ui->stackedWidget->setCurrentIndex(1);
-    } else {
-        QMessageBox::critical(this, tr("Erreur"), tr("Login ou mot de passe incorrect"));
-    }
+    // Affiche la vue
+    connexion(login, mdp);
 }
 
 MainWindow::~MainWindow()
@@ -120,4 +104,63 @@ void MainWindow::on_SeDesinscrire_clicked()
 
     //remet sur la bonne page
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_pushButtonInscription_clicked()
+{
+    std::string login = ui->lineLoginInscription->text().toStdString();
+    std::string mdp = ui->lineMdpInscription->text().toStdString();
+    int role = ui->comboBoxTypeCompte->currentIndex();
+
+    // Créer un utilisateur avec les données renseignées
+    adapter.getPF().sInscrire(login, mdp, role);
+
+    // Affiche la vue
+    connexion(login, mdp);
+}
+
+void MainWindow::connexion(std::string login, std::string mdp)
+{
+    if (adapter.getPF().seConnecter(login,mdp)) {
+
+        // Récupère l'user
+        etudiantConnecte = &(adapter.getPF().getEtudiantParLogin(login));
+
+        // Vide les champs de la première page
+        ui->lineLogin->setText("");
+        ui->lineLoginInscription->setText("");
+        ui->lineMdp->setText("");
+        ui->lineMdpInscription->setText("");
+
+        // Affiche un message de bienvenue
+        QString home = QString::fromStdString("Bienvenue " + login + " !");
+        ui->label_3->setText(home);
+
+        // Afficher les cours suivis
+        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
+        ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
+
+        // Affiche la liste des cours validés
+        listeModelCours.setStringList(adapter.ListeCoursValide());
+        ui->listCours->setModel(&listeModelCours);
+
+        // Affiche la liste des cours proposés si l'utilisateur est enseigant
+        if (adapter.getPF().isGranted(login, ROLE_ENSEIGN)) {
+            // Cast l'étudiant en enseigant (car on a vérifé son role)
+            listeModelCoursPropose.setStringList(adapter.ListeCoursPropose( *(Enseignant*)etudiantConnecte ));
+            ui->listViewCoursPropose->setModel(&listeModelCoursPropose);
+            // Affiche le widget liste et le label
+            ui->listViewCoursPropose->setVisible(true);
+            ui->label_CoursPropose->setVisible(true);
+        } else {
+            // Cache le widget liste et le label
+            ui->listViewCoursPropose->setVisible(false);
+            ui->label_CoursPropose->setVisible(false);
+        }
+
+        // Passe à la page suivante
+        ui->stackedWidget->setCurrentIndex(1);
+    } else {
+        QMessageBox::critical(this, tr("Erreur"), tr("Login ou mot de passe incorrect"));
+    }
 }

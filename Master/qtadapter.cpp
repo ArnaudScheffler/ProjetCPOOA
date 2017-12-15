@@ -44,6 +44,15 @@ QStringList QtAdapter::ListeCoursSuivis(Etudiant &e)
     return list;
 }
 
+QStringList QtAdapter::ListeCoursPropose(Enseignant &e)
+{
+    QStringList list;
+    for (auto it=e.getPremierCoursPropose(); it!=e.getDernierCoursPropose(); it++ ) {
+        list << QString::fromStdString( (*it)->getNom() );
+    }
+    return list;
+}
+
 QStringList QtAdapter::ListeEtudiantToQStringList(std::list<Etudiant*> list)
 {
     QStringList qStList;

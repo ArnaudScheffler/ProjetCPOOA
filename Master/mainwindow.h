@@ -28,6 +28,7 @@ private:
 
     QStringListModel listeModelCours;
     QStringListModel listeModelCoursSuivis;
+    QStringListModel listeModelCoursPropose;
     QStringListModel listeModelEtudiantsPrincipal;
     QStringListModel listeModelEtudiantsSecondaire;
     QStringListModel listeModelRessources;
@@ -66,6 +67,15 @@ private slots:
 
     void on_listCours_doubleClicked(const QModelIndex &index);
     void on_SeDesinscrire_clicked();
+    void on_pushButtonInscription_clicked();
+
+    /**
+     * @brief connexion connecte un utilisateur et affiche les données dans la vue
+     * @param login de l'utilisateur
+     * @param mdp de l'utilisateur
+     */
+    void connexion(std::string login, std::string mdp);
+
 };
 
 #endif // MAINWINDOW_H
