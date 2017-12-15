@@ -109,10 +109,10 @@ public:
 	void removeEtudiant(Etudiant& etu){
 		listeEtudiantA.remove(&etu);
 		listeEtudiantP.remove(&etu);
-		if (listeEtudiantP.size() < (size_t)nbPlace){
-			listeEtudiantP.push_back(*listeEtudiantA.begin());
-			listeEtudiantA.remove(*listeEtudiantA.begin());
-		}
+        if (listeEtudiantP.size() < (size_t)nbPlace && !listeEtudiantA.empty()){
+            listeEtudiantP.push_back(*listeEtudiantA.begin());
+            listeEtudiantA.remove(*listeEtudiantA.begin());
+        }
 	}
 
 	/**

@@ -20,17 +20,25 @@ int main(int argc, char **argv)
     Plateforme p;
 
     // Initialise la plateforme avec des données en dure
+    Enseignant* en2def = new Enseignant("Arnaud", "pass");
+    p.addUser(ROLE_ENSEIGN,*en2def);
+    Enseignant* endef = new Enseignant("Gautier", "pass");
+    p.addUser(ROLE_ENSEIGN,*endef);
     Cours *cpooa = new Cours("CPOOA", "","","",10);
     cpooa->setValidation(true);
+    cpooa->setEnseignant(*endef);
     Cours *algo = new Cours("Algo", "", "", "", 13);
     algo->setValidation(true);
+    algo->setEnseignant(*endef);
+    Cours *sys = new Cours("Systeme", "", "", "", 1);
+    sys->setValidation(true);
+    sys->setEnseignant(*en2def);
     Ressource *res = new Ressource("pdf", "./test.pdf");
     algo->addRessource(*res);
     p.addCours(*cpooa);
     p.addCours(*algo);
+    p.addCours(*sys);
 
-    Enseignant* endef = new Enseignant("Arnaud", "pass");
-    p.addUser(ROLE_ENSEIGN,*endef);
     Etudiant* etudef = new Etudiant("el", "pass");
     p.addUser(ROLE_ETUD,*etudef);
     etudef = new Etudiant("a", "pass");
