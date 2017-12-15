@@ -1,0 +1,4 @@
+﻿Par rapport à l'itération 7, Nous avons continué l'implémentation de l'interface graphique avec Qt :
+Il est désormais possible de s'inscrire en spécifiant son type de compte. Un administrateur peut valider un cours pour le rendre visible pour tout le monde. Un enseignant a sa liste de cours et peut en proposer de nouveaux qui devront être accepté par un admin. Un étudiant doit être inscrit au cours pour voir ses ressources. L'inscription/désinscription d'un étudiant à été rendu plus logique.
+Le diagramme de classe n'as pas changé.
+
