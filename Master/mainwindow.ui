@@ -381,7 +381,7 @@
       </widget>
       <widget class="QWidget" name="Cours">
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="4" column="0">
+        <item row="9" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="pushButtonAccueil">
@@ -412,14 +412,14 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0" colspan="3">
+        <item row="3" column="0" colspan="3">
          <widget class="QLabel" name="labelNomCours">
           <property name="text">
            <string>Cours :</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
+        <item row="7" column="2">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QLabel" name="label_7">
@@ -465,19 +465,19 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
+        <item row="7" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Liste des ressources :</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QLabel" name="labelpasinscrit">
             <property name="text">
              <string>Vous devez être inscrit pour visualiser les ressources de ce cours.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Liste des ressources :</string>
             </property>
            </widget>
           </item>
@@ -488,25 +488,9 @@
             </property>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </item>
-        <item row="4" column="2">
+        <item row="9" column="2">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <spacer name="horizontalSpacer_6">
@@ -529,6 +513,20 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="validationCours">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+           </font>
+          </property>
+          <property name="text">
+           <string>Cours valide</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

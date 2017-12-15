@@ -99,9 +99,30 @@ void MainWindow::on_pushButtonInscription_clicked()
     connexion(login, mdp);
 }
 
+void MainWindow::on_validationCours_stateChanged()
+{
+    if(ui->validationCours->isChecked()){
+        coursSelectionne->setValidation(true);
+    }else{
+        coursSelectionne->setValidation(false);
+    }
+}
+
+
 void MainWindow::afficherCours(const QString nomCours){
     coursSelectionne = &(adapter.getPF().getCoursParNom(nomCours.toStdString()));
 
+    //propre aux Admins
+    if(adapter.getPF().isGranted(etudiantConnecte->getLogin(),ROLE_ADMIN)){
+        ui->validationCours->show();
+        if(coursSelectionne->getStatus()){
+            ui->validationCours->setChecked(true);
+        }else{
+            ui->validationCours->setChecked(false);
+        }
+    }else{
+        ui->validationCours->hide();
+    }
     // Donne le nom du cours au label
     QString labelText = "Cours : " + nomCours;
     ui->labelNomCours->setText(labelText);

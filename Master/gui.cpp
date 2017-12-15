@@ -20,11 +20,13 @@ int main(int argc, char **argv)
     // Initialise les composants de la fenêtre
     MainWindow main(NULL, p);
 
-    // Initialise la plateforme avec des données en dure
+    // Initialise la plateforme avec des données en dur
     Enseignant* en2def = new Enseignant("Arnaud", "pass");
     p.addUser(ROLE_ENSEIGN,*en2def);
     Enseignant* endef = new Enseignant("Gautier", "pass");
     p.addUser(ROLE_ENSEIGN,*endef);
+    Admin* addef = new Admin("Elliot", "pass");
+    p.addUser(ROLE_ADMIN,*addef);
 
     // Ajoute des cours
     Cours *cpooa = new Cours("CPOOA", "","","",10);

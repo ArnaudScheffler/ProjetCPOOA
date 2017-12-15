@@ -82,6 +82,7 @@ private slots:
     void connexion(std::string login, std::string mdp);
 
     void on_inscrirecours_clicked();
+    void on_validationCours_stateChanged();
 };
 
 #endif // MAINWINDOW_H
