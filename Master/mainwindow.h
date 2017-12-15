@@ -6,6 +6,7 @@
 #include <QStringListModel>
 
 #include "Plateforme.hpp"
+#include "qtadapter.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +17,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent, Plateforme &p);
     ~MainWindow();
     void setPlateforme(Plateforme &p);
 
@@ -24,6 +25,7 @@ private:
     Ui::MainWindow *ui;         // Regroupe tous les widgets créé par l'ui designer
     Plateforme *plateforme;     // Permet d'accéder aux données de la plateforme
     Cours *coursSelectionne;    // Permet de garder un lien vers le cours séléctionné
+    QtAdapter adapter;
 
     QStringListModel listeModelCours;
     QStringListModel listeModelCoursSuivis;

@@ -28,7 +28,8 @@ SOURCES += \
     Cours.cpp \
     gui.cpp \
     mainwindow.cpp \
-    console.cpp
+    console.cpp \
+    qtadapter.cpp
 
 HEADERS += \
     Cours.hpp \
@@ -38,6 +39,7 @@ HEADERS += \
     rang.hpp \
     mainwindow.h \
     Ressource.hpp \
+    qtadapter.hpp
 
 FORMS += \
     mainwindow.ui

@@ -10,6 +10,7 @@
 #include <limits>
 #include <stdlib.h>
 #include <stdio.h>
+
 //#include "rang.hpp"
 #include "Cours.hpp"
 #include "Enseignant.hpp"
@@ -27,8 +28,7 @@
 #define RESET //rang::style::reset<<
 
 /**
- *\fn void pause()
- *\brief Met l'interface en attente
+ * @brief Met l'interface en attente
  */
 void pauseMenu(){
     std::cout << "Appuyez sur une touche pour continuer..." << std::endl;
@@ -39,9 +39,8 @@ void pauseMenu(){
 }
 
 /**
- *\fn void remplir
- *\brief Remplis la PA de donénes
- *\return void
+ * @brief Remplit la plateforme de donénes
+ * @return void
  */
 void remplir(Plateforme& p){
     Cours* cdef = new Cours("c", "", "", "", 2);
@@ -70,9 +69,8 @@ void remplir(Plateforme& p){
 }
 
 /**
- *\fn int main()
- *\brief Affiche la console
- *\return int
+ * @brief Affiche la console
+ * @return int
  */
 int main2() {
     bool quit = false;

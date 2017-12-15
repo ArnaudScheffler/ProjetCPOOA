@@ -29,7 +29,7 @@ class Plateforme {
 
 private:
 	std::map<std::string, Cours*> mapCours;
-    std::map<std::string, std::pair<int,Etudiant*>> mapUser;
+    std::map<std::string, std::pair<int, Etudiant*>> mapUser;
 
 public:
 

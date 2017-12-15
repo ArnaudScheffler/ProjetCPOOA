@@ -81,7 +81,7 @@ public:
 	 * @brief Permet a un etudiant de s'inscrire a un cours
 	 * @param c Le cours auquel l'etudiant veut s'inscrire
 	 * @version 1
-     * @return return si l'etudiant est déjà inscrit ou non
+     * @return return true si l'étudiant est déjà inscrit
 	 */
     bool inscrire(Cours& c) {
 		bool inscrit = false;
@@ -103,7 +103,7 @@ public:
 	 * @version 2a
 	 *
 	 */
-	void desinscrire(Cours& c) { c.removeEtudiant(*this);listeCours.remove(&c); }
+    void desinscrire(Cours& c) { c.removeEtudiant(*this); listeCours.remove(&c); }
 
 	/**
 	 * @brief Renvoie un string qui contient tous les cours auquel l'etudiant est inscrit
@@ -118,6 +118,13 @@ public:
 		}
 		return stringstream.str();
 	}
+
+    /**
+     * @brief getListeCours Retourne la liste des étudiants
+     * @return La liste des cours de l'étudiants
+     * @version 6
+     */
+    std::list<Cours*> getListeCours() { return listeCours; }
 
 	/**
 	 * @brief Redefinition de l'operateur == pour pouvoir l'utiliser sur des etudiants (dans liste.remove par exemple)

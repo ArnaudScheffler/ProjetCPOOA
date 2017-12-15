@@ -4,9 +4,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, Plateforme &p) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    plateforme(&p),
+    adapter(p)
 {
     ui->setupUi(this);
     //évite de nous retrouver sur le mauvais widget a cause de l'uidesigner
@@ -30,21 +32,12 @@ void MainWindow::seConnecter()
         ui->label_3->setText(home);
 
         // Afficher les cours suivis
-        Etudiant& e = plateforme->getEtudiantParLogin(login);
-        QStringList listCoursSuivis;
-        for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
-            listCoursSuivis << QString::fromStdString((*it)->getNom());
-        }
-        listeModelCoursSuivis.setStringList(listCoursSuivis);
+        Etudiant e = plateforme->getEtudiantParLogin(login);
+        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(e));
         ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
 
-        // Afficher tous les cours
-        QStringList listCours;
-        for(auto it = plateforme->getPremierCours(); it!=plateforme->getDernierCours(); it++) {
-            listCours << QString::fromStdString( (*it).first );
-        }
-
-        listeModelCours.setStringList(listCours);
+        // Affiche la liste des cours validés
+        listeModelCours.setStringList(adapter.ListeCoursValide());
         ui->listCours->setModel(&listeModelCours);
 
         ui->stackedWidget->setCurrentIndex(1);
@@ -83,31 +76,20 @@ void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
     QString labelText = "Cours : " + nomCours;
     ui->labelNomCours->setText(labelText);
 
+    // Affiche le nom de l'enseignant
+    QString labelNomEnseignant = "Enseignant : " + QString::fromStdString(coursSelectionne->getLoginEnseignant());
+    ui->label_NomEnseigant->setText(labelNomEnseignant);
+
     // Affiche la liste des ressources
-    std::list<Ressource*> listeRessource = coursSelectionne->getRessources();
-    QStringList QStringlistRessources;
-        for (auto it=listeRessource.cbegin(); it!=listeRessource.cend(); it++ ){
-            QStringlistRessources << QString::fromStdString( (*it)->getPath() );
-        }
-    listeModelRessources.setStringList(QStringlistRessources);
+    listeModelRessources.setStringList(adapter.mapRessourceToQStringList(coursSelectionne->getRessources()));
     ui->listRessources->setModel(&listeModelRessources);
 
     // Affiche la liste principale des étudiants
-    std::list<Etudiant*> listeEtudiantP = coursSelectionne->getListeEtudiantP();
-    QStringList QStringlistEtudiantP;
-        for (auto it=listeEtudiantP.cbegin(); it!=listeEtudiantP.cend(); it++ ){
-            QStringlistEtudiantP << QString::fromStdString( (*it)->getLogin() );
-        }
-    listeModelEtudiantsPrincipal.setStringList(QStringlistEtudiantP);
+    listeModelEtudiantsPrincipal.setStringList(adapter.ListeEtudiantToQStringList(coursSelectionne->getListeEtudiantP()));
     ui->listPrincipaleEtudiant->setModel(&listeModelEtudiantsPrincipal);
 
     // Affiche la liste d'attente des étudiants
-    std::list<Etudiant*> listeEtudiantA = coursSelectionne->getListeEtudiantA();
-    QStringList QStringlistEtudiantA;
-        for (auto it=listeEtudiantA.cbegin(); it!=listeEtudiantA.cend(); it++ ){
-            QStringlistEtudiantA << QString::fromStdString( (*it)->getLogin() );
-        }
-    listeModelEtudiantsSecondaire.setStringList(QStringlistEtudiantA);
+    listeModelEtudiantsSecondaire.setStringList(adapter.ListeEtudiantToQStringList(coursSelectionne->getListeEtudiantA()));
     ui->listAttenteEtudiant->setModel(&listeModelEtudiantsSecondaire);
 
     // Affiche le nombre de place
@@ -119,8 +101,6 @@ void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
 }
 
 
-
-
 void MainWindow::on_listCours_doubleClicked(const QModelIndex &index)
 {
     std::string login = ui->lineLogin->text().toStdString();
@@ -130,11 +110,7 @@ void MainWindow::on_listCours_doubleClicked(const QModelIndex &index)
     coursSelectionne = &plateforme->getCoursParNom(nomCours.toStdString());
 
     if(!e.inscrire(*coursSelectionne)){
-        QStringList listCoursSuivis;
-        for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
-            listCoursSuivis << QString::fromStdString((*it)->getNom());
-        }
-        listeModelCoursSuivis.setStringList(listCoursSuivis);
+        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(e));
         ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
     }
 }
@@ -146,11 +122,7 @@ void MainWindow::on_SeDesinscrire_clicked()
 
     e.desinscrire(*coursSelectionne);
 
-    QStringList listCoursSuivis;
-    for(auto it = e.getPremierCours(); it!=e.getDernierCours(); it++) {
-        listCoursSuivis << QString::fromStdString((*it)->getNom());
-    }
-    listeModelCoursSuivis.setStringList(listCoursSuivis);
+    listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(e));
     ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
 
     ui->stackedWidget->setCurrentIndex(1);

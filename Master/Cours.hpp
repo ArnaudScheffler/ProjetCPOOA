@@ -89,11 +89,11 @@ public:
 
 	/**
 	 * @brief Renvoie le boolean de validité du cours
-	 * @return boolean
+     * @return boolean
 	 * @version 3
 	 *
 	 */
-	bool getStatus() { return validation ;}
+    bool getStatus() { return validation ;}
 
     /**
      * @brief Retourne le nombre de place en liste principale
@@ -102,8 +102,8 @@ public:
     int getNbPlace() { return nbPlace; }
 
 	/**
-	 * @brief Supprime un etudiant a la liste principale/attente
-	 * @param etu Etudiant devant etre ajouter a la liste
+     * @brief Supprime un étudiant de la liste principale/attente
+     * @param etu Etudiant à désinscrire
 	 * @version 3
 	 */
 	void removeEtudiant(Etudiant& etu){
@@ -132,18 +132,11 @@ public:
 	std::list<Etudiant*> getListeEtudiantA() { return listeEtudiantA; }
 
     /**
-     * @brief Renvoie la liste des ressources du cours
-     * @return std::list<Ressource*>
-     * @version 5
-     *
+     * @brief getRessources Retourne la map de Ressources
+     * @return std::map<std::string, Ressource*>
+     * @version 6
      */
-    std::list<Ressource*> getRessources() {
-        std::list<Ressource*> res;
-        for(auto it = mapRessource.cbegin(); it != mapRessource.cend();it++){
-            res.push_back((it->second));
-        }
-        return res;
-    }
+    std::map<std::string, Ressource*> getRessources() { return mapRessource; }
 
 	/**
 	 * @brief Ajoute un etudiant a la liste principale/attente

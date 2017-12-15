@@ -14,10 +14,11 @@ int main(int argc, char **argv)
 {
     //init des composants
     QApplication app(argc, argv);
-    //init des composants de la fenêtre
-    MainWindow main;
 
     Plateforme p;
+
+    //init des composants de la fenêtre
+    MainWindow main(NULL, p);
 
     // Initialise la plateforme avec des données en dure
     Enseignant* en2def = new Enseignant("Arnaud", "pass");
