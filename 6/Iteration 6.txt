@@ -4,6 +4,7 @@ Le cas de l'inscription d'un Etudiant à un cours a été ajouté.
 Le cas de l'desinscription d'un Etudiant à un cours a été ajouté.
 On affiche le nombre de places et l'enseignant d'un cours.
 La liste d'attente et principale est mise a jour dynamiquement.
+Il a aussi été corrigé un bug lorsque l'on retire desinscrit un étudiant d'un cours et qu'il est le dernier de la liste principale
 
 Nous avans par ailleurs ajouté une classe qtadapter (Un DP Adapter) qui fait le lien entre les types propres QT et notre modèle.
 Le diagramme de classe à été modifié.

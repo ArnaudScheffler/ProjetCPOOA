@@ -39,7 +39,8 @@ HEADERS += \
     rang.hpp \
     mainwindow.h \
     Ressource.hpp \
-    qtadapter.hpp
+    qtadapter.hpp \
+    Admin.hpp
 
 FORMS += \
     mainwindow.ui
