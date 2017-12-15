@@ -95,7 +95,7 @@ public:
             Etudiant& etud = this->getEtudiantParLogin(nometud);
             Cours& cours = this->getCoursParNom(nomCours);
             if (cours.getStatus()){
-                res = etud.inscrire(cours);
+                etud.inscrire(cours);
             }else res = -2;
         }else res = -1;
 

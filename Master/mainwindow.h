@@ -64,10 +64,15 @@ private slots:
      */
     void on_listCoursSuivis_doubleClicked(const QModelIndex &index);
 
-
     void on_listCours_doubleClicked(const QModelIndex &index);
     void on_SeDesinscrire_clicked();
     void on_pushButtonInscription_clicked();
+
+    /**
+     * @brief affiche le cours selectionné par l'user
+     * @param nomCours le nom du cours
+     */
+    void afficherCours(const QString nomCours);
 
     /**
      * @brief connexion connecte un utilisateur et affiche les données dans la vue
@@ -76,6 +81,7 @@ private slots:
      */
     void connexion(std::string login, std::string mdp);
 
+    void on_inscrirecours_clicked();
 };
 
 #endif // MAINWINDOW_H

@@ -77,24 +77,32 @@ public:
 	 */
 	std::list<Cours*>::iterator getDernierCours() { return listeCours.end(); }
 
+    /**
+     * @brief verifie si l'étudiant est inscrit.
+     * @param c Le cours auquel l'etudiant veut s'inscrire
+     * @version 7
+     * @return return true si l'étudiant est déjà inscrit
+     */
+    bool isInscrit(Cours& c) {
+        bool inscrit = false;
+        for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
+            if( ((*it)->getNom()) == c.getNom() ){
+                inscrit = true;
+            }
+        }
+        return inscrit;
+    }
+
 	/**
 	 * @brief Permet a un etudiant de s'inscrire a un cours
 	 * @param c Le cours auquel l'etudiant veut s'inscrire
 	 * @version 1
-     * @return return true si l'étudiant est déjà inscrit
 	 */
-    bool inscrire(Cours& c) {
-		bool inscrit = false;
-		for(std::list<Cours*>::iterator it = getPremierCours(); it != getDernierCours(); it++) {
-			if( ((*it)->getNom()) == c.getNom() ){
-				inscrit = true;
-			}
-		}
-		if(!inscrit){
+    void inscrire(Cours& c) {
+        if(!isInscrit(c)){
 			c.addEtudiant(*this);
 			listeCours.push_back(&c);
 		}
-        return inscrit;
 	}
 
 	/**

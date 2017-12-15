@@ -49,34 +49,7 @@ void MainWindow::on_listCoursSuivis_doubleClicked(const QModelIndex &index)
 {
     // On récupère le nom du cours en fonction de l'index
     QString nomCours = listeModelCoursSuivis.data(index,0).toString();
-    coursSelectionne = &(adapter.getPF().getCoursParNom(nomCours.toStdString()));
-
-    // Donne le nom du cours au label
-    QString labelText = "Cours : " + nomCours;
-    ui->labelNomCours->setText(labelText);
-
-    // Affiche le nom de l'enseignant
-    QString labelNomEnseignant = "Enseignant : " + QString::fromStdString(coursSelectionne->getLoginEnseignant());
-    ui->label_NomEnseigant->setText(labelNomEnseignant);
-
-    // Affiche la liste des ressources
-    listeModelRessources.setStringList(adapter.mapRessourceToQStringList(coursSelectionne->getRessources()));
-    ui->listRessources->setModel(&listeModelRessources);
-
-    // Affiche la liste principale des étudiants
-    listeModelEtudiantsPrincipal.setStringList(adapter.ListeEtudiantToQStringList(coursSelectionne->getListeEtudiantP()));
-    ui->listPrincipaleEtudiant->setModel(&listeModelEtudiantsPrincipal);
-
-    // Affiche la liste d'attente des étudiants
-    listeModelEtudiantsSecondaire.setStringList(adapter.ListeEtudiantToQStringList(coursSelectionne->getListeEtudiantA()));
-    ui->listAttenteEtudiant->setModel(&listeModelEtudiantsSecondaire);
-
-    // Affiche le nombre de place
-    labelText = QString("Nombre de places : %1").arg(coursSelectionne->getNbPlace());
-    ui->labelNombrePlace->setText(labelText);
-
-    // Affiche la bonne page
-    ui->stackedWidget->setCurrentIndex(2);
+    afficherCours(nomCours);
 }
 
 
@@ -84,13 +57,7 @@ void MainWindow::on_listCours_doubleClicked(const QModelIndex &index)
 {
     //Recupere le nom du cours
     QString nomCours = listeModelCours.data(index,0).toString();
-    coursSelectionne = &(adapter.getPF().getCoursParNom(nomCours.toStdString()));
-
-    //Inscrit l'étudiant
-    if(!etudiantConnecte->inscrire(*coursSelectionne)){
-        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
-        ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
-    }
+    afficherCours(nomCours);
 }
 
 void MainWindow::on_SeDesinscrire_clicked()
@@ -101,6 +68,19 @@ void MainWindow::on_SeDesinscrire_clicked()
     //Met a jour ses logins
     listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
     ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
+
+    //remet sur la bonne page
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_inscrirecours_clicked()
+{
+    //Inscrit l'étudiant
+    if(!etudiantConnecte->isInscrit(*coursSelectionne)){
+        etudiantConnecte->inscrire(*coursSelectionne);
+        listeModelCoursSuivis.setStringList(adapter.ListeCoursSuivis(*etudiantConnecte));
+        ui->listCoursSuivis->setModel(&listeModelCoursSuivis);
+    }
 
     //remet sur la bonne page
     ui->stackedWidget->setCurrentIndex(1);
@@ -117,6 +97,50 @@ void MainWindow::on_pushButtonInscription_clicked()
 
     // Affiche la vue
     connexion(login, mdp);
+}
+
+void MainWindow::afficherCours(const QString nomCours){
+    coursSelectionne = &(adapter.getPF().getCoursParNom(nomCours.toStdString()));
+
+    // Donne le nom du cours au label
+    QString labelText = "Cours : " + nomCours;
+    ui->labelNomCours->setText(labelText);
+
+    // Affiche le nom de l'enseignant
+    QString labelNomEnseignant = "Enseignant : " + QString::fromStdString(coursSelectionne->getLoginEnseignant());
+    ui->label_NomEnseigant->setText(labelNomEnseignant);
+
+    // Affiche la liste des ressources
+    if (etudiantConnecte->isInscrit(*coursSelectionne)){
+        listeModelRessources.setStringList(adapter.mapRessourceToQStringList(coursSelectionne->getRessources()));
+        ui->listRessources->setModel(&listeModelRessources);
+        ui->labelpasinscrit->hide();
+        ui->inscrirecours->hide();
+        ui->listRessources->show();
+        ui->label_6->show();
+        ui->SeDesinscrire->show();
+    }else{
+        ui->listRessources->hide();
+        ui->label_6->hide();
+        ui->labelpasinscrit->show();
+        ui->inscrirecours->show();
+        ui->SeDesinscrire->hide();
+    }
+
+    // Affiche la liste principale des étudiants
+    listeModelEtudiantsPrincipal.setStringList(adapter.ListeEtudiantToQStringList(coursSelectionne->getListeEtudiantP()));
+    ui->listPrincipaleEtudiant->setModel(&listeModelEtudiantsPrincipal);
+
+    // Affiche la liste d'attente des étudiants
+    listeModelEtudiantsSecondaire.setStringList(adapter.ListeEtudiantToQStringList(coursSelectionne->getListeEtudiantA()));
+    ui->listAttenteEtudiant->setModel(&listeModelEtudiantsSecondaire);
+
+    // Affiche le nombre de place
+    labelText = QString("Nombre de places : %1").arg(coursSelectionne->getNbPlace());
+    ui->labelNombrePlace->setText(labelText);
+
+    // Affiche la bonne page
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::connexion(std::string login, std::string mdp)

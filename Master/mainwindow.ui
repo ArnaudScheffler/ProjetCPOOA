@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="ConnectionInscription">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -51,22 +51,105 @@
           </property>
          </spacer>
         </item>
-        <item row="4" column="2">
-         <layout class="QGridLayout" name="gridLayout_6">
+        <item row="4" column="1">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Login</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="Connexion">
+            <property name="text">
+             <string>Se connecter</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineMdp">
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineLogin"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Mot de passe</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="label_9">
             <property name="font">
              <font>
-              <pointsize>30</pointsize>
+              <pointsize>29</pointsize>
               <weight>75</weight>
               <bold>true</bold>
+              <kerning>true</kerning>
              </font>
             </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
             <property name="text">
-             <string>Inscription</string>
+             <string>Connexion</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="2">
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="5" column="1">
+           <widget class="QPushButton" name="pushButtonInscription">
+            <property name="text">
+             <string>S'inscrire</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Mot de passe</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Type de compte</string>
             </property>
            </widget>
           </item>
@@ -77,16 +160,6 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineLoginInscription"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>Mot de passe</string>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QLineEdit" name="lineMdpInscription">
             <property name="echoMode">
@@ -94,10 +167,23 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_13">
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineLoginInscription"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_10">
+            <property name="font">
+             <font>
+              <pointsize>29</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
-             <string>Type de compte</string>
+             <string>Inscription</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -121,80 +207,7 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QPushButton" name="pushButtonInscription">
-            <property name="text">
-             <string>S'inscrire</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="4" column="1">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <layout class="QGridLayout" name="gridLayout_7">
-          <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label_9">
-            <property name="font">
-             <font>
-              <pointsize>29</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-              <kerning>true</kerning>
-             </font>
-            </property>
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Connexion</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Login</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineMdp">
-            <property name="echoMode">
-             <enum>QLineEdit::Password</enum>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QPushButton" name="Connexion">
-            <property name="text">
-             <string>Se connecter</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineLogin"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Mot de passe</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <spacer name="verticalSpacer_5">
+           <spacer name="verticalSpacer_7">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -368,12 +381,19 @@
       </widget>
       <widget class="QWidget" name="Cours">
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="3" column="0">
+        <item row="4" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="pushButtonAccueil">
             <property name="text">
              <string>Accueil</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="inscrirecours">
+            <property name="text">
+             <string>S'inscrire</string>
             </property>
            </widget>
           </item>
@@ -392,14 +412,14 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="0" colspan="3">
+        <item row="1" column="0" colspan="3">
          <widget class="QLabel" name="labelNomCours">
           <property name="text">
            <string>Cours :</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="2" column="2">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QLabel" name="label_7">
@@ -445,12 +465,19 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QLabel" name="label_6">
             <property name="text">
              <string>Liste des ressources :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelpasinscrit">
+            <property name="text">
+             <string>Vous devez être inscrit pour visualiser les ressources de ce cours.</string>
             </property>
            </widget>
           </item>
@@ -461,9 +488,25 @@
             </property>
            </widget>
           </item>
+          <item>
+           <spacer name="verticalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </item>
-        <item row="3" column="2">
+        <item row="4" column="2">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <spacer name="horizontalSpacer_6">
@@ -499,7 +542,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -527,14 +570,10 @@
   <tabstop>lineLogin</tabstop>
   <tabstop>lineMdp</tabstop>
   <tabstop>Connexion</tabstop>
-  <tabstop>lineLoginInscription</tabstop>
-  <tabstop>lineMdpInscription</tabstop>
-  <tabstop>comboBoxTypeCompte</tabstop>
   <tabstop>pushButtonInscription</tabstop>
   <tabstop>listCoursSuivis</tabstop>
   <tabstop>listCours</tabstop>
   <tabstop>buttonDeconnexion</tabstop>
-  <tabstop>listRessources</tabstop>
   <tabstop>listPrincipaleEtudiant</tabstop>
   <tabstop>listAttenteEtudiant</tabstop>
   <tabstop>pushButtonAccueil</tabstop>
