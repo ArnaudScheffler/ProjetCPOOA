@@ -1,4 +1,0 @@
-﻿To Do :
-
-- Faire un adapateur entre la platefrome et les vues
-- d'autres windows

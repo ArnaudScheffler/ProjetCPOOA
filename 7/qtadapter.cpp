@@ -1,5 +1,4 @@
 #include "qtadapter.hpp"
-#include <QDebug>
 
 QtAdapter::QtAdapter(Plateforme &p)
 {
@@ -31,8 +30,7 @@ QStringList QtAdapter::ListeCoursPourAdmin()
     QStringList list = ListeCoursValide();
     for (auto it=plateforme->getPremierCours(); it!=plateforme->getDernierCours(); it++ ) {
         if ( ! it->second->getStatus() ) {
-            qDebug() << "un cours";
-            list << QString::fromStdString( it->first ) + " (à valider)" ;}
+            list << QString::fromStdString( it->first ) + " (a valider)" ;}
     }
     return list;
 }

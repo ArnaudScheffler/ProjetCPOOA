@@ -1,4 +1,3 @@
-#include <QtDebug>
 #include <QStringListModel>
 
 #include "mainwindow.hpp"
@@ -114,8 +113,8 @@ void MainWindow::on_validationCours_stateChanged()
 
 void MainWindow::afficherCours(QString nomCours){
 
-    // On enlève le " (à valider)" pour retrouver le cours dans la plateforme
-    if (nomCours.contains(" (à valider)"))
+    // On enlève le " (a valider)" pour retrouver le cours dans la plateforme
+    if (nomCours.contains(" (a valider)"))
         nomCours.chop(12);
 
     coursSelectionne = &(adapter.getPF().getCoursParNom(nomCours.toStdString()));

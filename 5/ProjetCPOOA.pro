@@ -4,7 +4,7 @@
 #TEMPLATE    = app
 
 CONFIG += c++11
-#CONFIG -= app_bundle
+QMAKE_CXXFLAGS += -std=c++11
 
 QT       += core gui
 
@@ -35,7 +35,7 @@ HEADERS += \
     Etudiant.hpp \
     Plateforme.hpp \
     rang.hpp \
-    mainwindow.h \
+    mainwindow.hpp \
     Ressource.hpp
 
 FORMS += \

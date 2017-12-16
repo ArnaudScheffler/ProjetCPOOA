@@ -4,7 +4,7 @@
 #TEMPLATE    = app
 
 CONFIG += c++11
-#CONFIG -= app_bundle
+QMAKE_CXXFLAGS += -std=c++11
 
 QT       += core gui
 
@@ -28,7 +28,6 @@ SOURCES += \
     Cours.cpp \
     gui.cpp \
     mainwindow.cpp \
-    console.cpp \
     qtadapter.cpp
 
 HEADERS += \
