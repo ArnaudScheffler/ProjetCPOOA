@@ -19,8 +19,8 @@
 
 
 //#define EFFACER "\ec"
-//define EFFACER "\033c"
-#define EFFACER ""
+#define EFFACER "\033c"
+//#define EFFACER ""
 #define GREEN <<rang::fg::green
 #define RED <<rang::fg::red
 #define BLUE <<rang::fg::cyan

@@ -2,7 +2,7 @@
 #include <QtDebug>
 
 #include "ui_mainwindow.h"
-#include "mainwindow.h"
+#include "mainwindow.hpp"
 
 /**
  * @brief main Permet de lancer l'ui du projet.

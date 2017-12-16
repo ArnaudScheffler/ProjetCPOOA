@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//#include "rang.hpp"
+#include "rang.hpp"
 #include "Cours.hpp"
 #include "Enseignant.hpp"
 #include "Etudiant.hpp"
@@ -20,12 +20,12 @@
 
 
 //#define EFFACER "\ec"
-//define EFFACER "\033c"
-#define EFFACER ""
-#define GREEN //<<rang::fg::green
-#define RED //<<rang::fg::red
-#define BLUE //<<rang::fg::cyan
-#define RESET //rang::style::reset<<
+#define EFFACER "\033c"
+//#define EFFACER ""
+#define GREEN << rang::fg::green
+#define RED << rang::fg::red
+#define BLUE << rang::fg::cyan
+#define RESET rang::style::reset<<
 
 /**
  * @brief Met l'interface en attente
@@ -72,7 +72,7 @@ void remplir(Plateforme& p){
  * @brief Affiche la console
  * @return int
  */
-int main2() {
+int main() {
     bool quit = false;
     int choice = -1;
 

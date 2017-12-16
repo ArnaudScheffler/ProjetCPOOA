@@ -26,6 +26,7 @@ private:
     Cours *coursSelectionne;    // Permet de garder un lien vers le cours séléctionné
     QtAdapter adapter;          // Permet d'accéder aux données de la plateforme a travers l'adapter
 
+    // Conserve les models pour afficher les informations dans les listes
     QStringListModel listeModelCours;
     QStringListModel listeModelCoursSuivis;
     QStringListModel listeModelCoursPropose;
@@ -64,8 +65,20 @@ private slots:
      */
     void on_listCoursSuivis_doubleClicked(const QModelIndex &index);
 
+    /**
+     * @brief on_listCours_doubleClicked Permet d'affchier un cours auquel l'utilisateur n'est pas inscrit
+     * @param index
+     */
     void on_listCours_doubleClicked(const QModelIndex &index);
+
+    /**
+     * @brief on_SeDesinscrire_clicked Désinscrit un étudiant du cours
+     */
     void on_SeDesinscrire_clicked();
+
+    /**
+     * @brief on_pushButtonInscription_clicked Inscrit un utilisateur au programme
+     */
     void on_pushButtonInscription_clicked();
 
     /**
@@ -81,12 +94,34 @@ private slots:
      */
     void connexion(std::string login, std::string mdp);
 
+    /**
+     * @brief majListes Fonction qui permet de mettre à jour les listes d'affichage des informations
+     */
     void majListes();
 
+    /**
+     * @brief on_inscrirecours_clicked Inscrit un étudiant au cours (qu'il est en train de voir)
+     */
     void on_inscrirecours_clicked();
+
+    /**
+     * @brief on_validationCours_stateChanged Permet à un administrateur de valider un cours
+     */
     void on_validationCours_stateChanged();
+
+    /**
+     * @brief on_buttonProposerCoursAccueil_clicked Affiche la vue pour proposer un nouveau cours
+     */
     void on_buttonProposerCoursAccueil_clicked();
+
+    /**
+     * @brief on_pushButtonAccueil_2_clicked Retourne à l'accueil quand on est sur la page Proposer un cours
+     */
     void on_pushButtonAccueil_2_clicked();
+
+    /**
+     * @brief on_pushButtonProposerCours_clicked Permet de finaliser la proposition d'un nouveau cours
+     */
     void on_pushButtonProposerCours_clicked();
 };
 

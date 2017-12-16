@@ -27,4 +27,4 @@ clean_doc:
 	$(call for_rep, $(ALL_REP), $(my_make) $@)
 
 dist:	clean 
-	tar -jcf CPOOA_Darmois_This_Scheffler.tbz $(ALL_REP) Makefile
+	tar -jcf CPOOA_Darmois_This_Scheffler.tbz $(ALL_REP) Makefile *.pdf

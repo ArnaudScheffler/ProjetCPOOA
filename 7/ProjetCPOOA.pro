@@ -37,7 +37,7 @@ HEADERS += \
     Etudiant.hpp \
     Plateforme.hpp \
     rang.hpp \
-    mainwindow.h \
+    mainwindow.hpp \
     Ressource.hpp \
     qtadapter.hpp \
     Admin.hpp

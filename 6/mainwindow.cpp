@@ -1,7 +1,7 @@
 #include <QtDebug>
 #include <QStringListModel>
 
-#include "mainwindow.h"
+#include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent, Plateforme &p) :
